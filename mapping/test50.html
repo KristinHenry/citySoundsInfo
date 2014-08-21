@@ -131,7 +131,7 @@ div.trackdesc{
   top: 170px;
   left: 460px;
   font-size: 18px;
-  /*opacity: 0;*/
+  opacity: 0;
 
 }
 
@@ -140,7 +140,7 @@ div.trackdata{
   top: 200px;
   left: 460px;
   font-size: 12px;
-  /*opacity: 0;*/
+  opacity: 0;
 }
 
 div.trackInfo{
@@ -148,6 +148,7 @@ div.trackInfo{
   text-align: center;
   top: 200px;
   left: 10px;
+  opacity: 0;
 }
 
 label {
@@ -289,7 +290,7 @@ var x2 = d3.scale.linear()
   .range([width_menu+ 300, width + 200]);
 
 var y2 = d3.scale.linear()
-    .range([80, 320]);
+    .range([80, 280]);
 
 
 var dx = function(i) { return 0; };
@@ -328,19 +329,20 @@ var svg = d3.select("body").append("svg")
 var trackInfo = d3.select("body").append("div")
   .attr("class", "trackInfo")
   .text(function(){return "trackInfo"})
-  .style("opacity", 1);
+  .style("opacity", 0);
 
 
 var trackDesc = d3.select("body").append("div")
   .attr("class", "trackdesc")
   .text(function(){ return "Walk Description ...";})
-  .style("opacity", .2)
+  .style("opacity", 0)
   ;
 
 
 var trackData = d3.select("body").append("div")
   .attr("class", "trackdata")
-  .text(function(){ return "track data goes here"});
+  .text(function(){ return "track data goes here"})
+  .style("opacity", 0);
 
 
 
@@ -874,9 +876,9 @@ d3.csv("maxMinDateInfo_2.csv", function(error, data){
 
             if(d.walkid != walkid){
                 
-                trackInfo.text(d.walkid)
-                  .style("top", d3.select(this).attr("cy") + "px")
-                  .style("opacity", 1);
+                // trackInfo.text(d.walkid)
+                //   .style("top", d3.select(this).attr("cy") + "px")
+                //   .style("opacity", 1);
 
                 // get all dots in this walk
                 d3.selectAll(".dot")

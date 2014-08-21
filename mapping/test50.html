@@ -729,35 +729,6 @@ function drawDetails(d, cx, cy){
   wf_info2.text("Recording Levels");
   wf_info2a.text("min:  " + d.min);
   wf_info2b.text("max: " + d.max);
-
-  // ToDo: position relative to map...so outside of streets
-  // detail_circ
-  //   .attr("cx", cx)
-  //   .attr("cy", cy-10 + minV(d.min))
-  //   .attr("r", 2)
-  //   .style("fill", "red")
-  //   .style("opacity", 1);
-
-
-  // detail_ln1
-  //     .attr("x1", function(){ var x = cx - maxV(d.max);
-  //                             return x; } )
-  //     .attr("y1", function(){ var y = cy - maxV(d.max); 
-  //                             return y;} )
-  //     .attr("x2", function(){ var x = (cx - 1) + maxV(d.max) + 1; 
-  //                             return x;} )
-  //     .attr("y2", function(){ var y = (cy - 1) + maxV(d.max) + 1; 
-  //                             return y;} )
-  //     .style("stroke-width", 2)
-  //     .style("stroke", "red")
-  //     .style("opacity", .8)
-  //     ;
-
-  // detail.text("min: " + Math.floor(d.min))
-  //   .style("top", (cy - 20 )+ "px")
-  //   .style("left", (cx) + "px")
-  //   .style("opacity", 1);
-
 }
 
 
@@ -883,8 +854,10 @@ d3.csv("maxMinDateInfo_2.csv", function(error, data){
                 // get all dots in this walk
                 d3.selectAll(".dot")
                   .filter(function(d1){ return d1.walkid === d.walkid ; })
-                  .style("stroke", "black")
-                  .style("stroke-width", 1); 
+                  .style("opacity", .8)
+                  //.style("stroke", "black")
+                  .style("stroke-width", 1)
+                  ; 
 
             } else{
 
@@ -916,8 +889,10 @@ d3.csv("maxMinDateInfo_2.csv", function(error, data){
 
                 d3.selectAll(".dot")
                   .filter(function(d1){ return d1.walkid === d.walkid ; })
-                  .style("stroke", "white")
-                  .style("stroke-width", 1);
+                  .style("opacity", .2)
+                  //.style("stroke", "white")
+                  //.style("stroke-width", 1)
+                  ;
                  
 
             } else {
@@ -1013,30 +988,9 @@ d3.csv("maxMinDateInfo_2.csv", function(error, data){
           .attr("x", function(d,i){ return dx2(streets[i][0]) + 10; })
           .attr("y", function(d,i){ return dy2(streets[i][1]) + 4;})
           .attr("fill", "gray")
+          .style("font-size", 10)
           .text(function(d) { return d; });
 
-
-  /* minor streets */
-  
-  // var s17 = [37.763269, -122.421908, 37.763430, -122.419387];
-  // var s18 = [37.761666, -122.421897, 37.761844, -122.419151];
-  // var s19 = [37.760062, -122.421726, 37.760258, -122.418947];
-  // var s20 = [37.758485, -122.421640, 37.758646, -122.418840];
-  // var s21 = [37.756882, -122.421361, 37.757026, -122.418668];
-
-  // var minorStreets = [s17, s18, s19, s20, s21];
-
-  // svg.selectAll(".line")
-  //       .data(minorStreets)
-  //       .enter()
-  //       .append("line")
-  //       .attr("x1", function(d){ return dx2(d[0]); })
-  //       .attr("y1", function(d){ return dy2(d[1]); })
-  //       .attr("x2", function(d){ return dx2(d[2]); }) 
-  //       .attr("y2", function(d){ return dy2(d[3]); })
-  //       .style("opacity", .2)
-  //       .style("stroke-width", 1)
-  //       .style('stroke', "#c7c7c7");
 
 
 });

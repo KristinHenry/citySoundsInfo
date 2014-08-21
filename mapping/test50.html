@@ -312,11 +312,10 @@ var maxV = d3.scale.linear()
   .range([1, 30]);
 
 var color = d3.scale.ordinal()
-  .range(["#393b79","#5254a3","#6b6ecf","#9c9ede",
-          //"#c7c7c7",
+  .range(["#637939", "#8ca252", "#b5cf6b", "#cedb9c",
           "#999999",
-          "#cedb9c","#b5cf6b","#8ca252","#637939",
-          "#bd9e39"]);
+          "#9c9ede", "#6b6ecf", "#5254a3", "#393b79",
+          "#636363"]);
 
 
 var svg = d3.select("body").append("svg")
@@ -429,7 +428,6 @@ function sortWavesForTracks(){
 }
 
 
-
 function getLabel(d){
       if(d-12 >=0){
         return d-12 + "pm"
@@ -495,14 +493,14 @@ var bar_r = svg.append("text")
 
 var button_sort = d3.select("body").append("input")
   .attr("type", "image")
-  .attr("src", "buttonsortvolume.jpg")
+  .attr("src", "buttonsortvolume.png")
   .attr("class", "sortbutton")
   .attr("value", "Sort by Volume")
   .on("click", function() { sortBySize(); });
 
 var button_play = d3.select("body").append("input")
   .attr("type", "image")
-  .attr("src", "buttonplay.jpg")
+  .attr("src", "buttonplay.png")
   .attr("class", "playbutton")
   .attr("value", "Play")
   .on("click", function() { playOnClick(); });
@@ -662,10 +660,10 @@ function sortBySize(){
 
   if(sortedby == "map"){
     sortedby = "size";
-    button_sort.attr("src", "buttonsortmap.jpg");
+    button_sort.attr("src", "buttonsortmap.png");
   } else {
     sortedby = "map";
-    button_sort.attr("src", "buttonsortvolume.jpg");
+    button_sort.attr("src", "buttonsortvolume.png");
   }
   
   d3.transition().duration(750)

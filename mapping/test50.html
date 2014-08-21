@@ -441,7 +441,7 @@ function getLabel(d){
 svg.append("rect")
   .attr("width", width + margin.left + margin.right)
   .attr("height", height + margin.top + margin.bottom)
-  .style("stroke", "#c7c7c7")
+  //.style("stroke", "#c7c7c7")
   .style("fill", "white");
 
 
@@ -496,14 +496,16 @@ var button_sort = d3.select("body").append("input")
   .attr("src", "buttonsortvolume.png")
   .attr("class", "sortbutton")
   .attr("value", "Sort by Volume")
-  .on("click", function() { sortBySize(); });
+  .on("click", function() { sortBySize(); })
+  .style("opacity", 0);
 
 var button_play = d3.select("body").append("input")
   .attr("type", "image")
   .attr("src", "buttonplay.png")
   .attr("class", "playbutton")
   .attr("value", "Play")
-  .on("click", function() { playOnClick(); });
+  .on("click", function() { playOnClick(); })
+  .style("opacity", 0);
 
 
 var detail = d3.select("body").append("div")

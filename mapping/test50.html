@@ -195,7 +195,28 @@ div.buttons {
   top: 480px;
   left: 1000px;
   width: 140px;
-  opacity: .4;
+  opacity: 0;
+}
+
+.sortbuttonmap {
+  position: absolute;
+  top: 488px;
+  left: 1010px;
+  width: 140px;
+}
+
+.sortbuttonslash {
+  position: absolute;
+  top: 488px;
+  left: 1050px;
+  width: 140px;
+}
+
+.sortbuttonvolume {
+  position: absolute;
+  top: 488px;
+  left: 1060px;
+  width: 140px;
 }
 
 .line {
@@ -251,6 +272,8 @@ var sortedby = "map";
 var playstate = "pause";
 var menuOpacity = .6;
 var mapOpacity = .4;
+var sortOpacityOn = .9;
+var sortOpacityOff = .4;
 
 var lists = {};
 var trackIDs = [];
@@ -534,13 +557,34 @@ var bar_r = svg.append("text")
   .style("text-anchor", "left")
   .text("6pm");
 
+
+
+var button_sort_map = d3.select("body").append("div")
+  .attr("class", "sortbuttonmap")
+  .text(function(){ return "map";})
+  .style("opacity", sortOpacityOn)
+  ;
+
+var button_sort_slash = d3.select("body").append("div")
+  .attr("class", "sortbuttonslash")
+  .text(function(){ return "/";})
+  .style("opacity", 1)
+  ;
+
+var button_sort_volume = d3.select("body").append("div")
+  .attr("class", "sortbuttonvolume")
+  .text(function(){ return "sort";})
+  .style("opacity", sortOpacityOff)
+  ;
+
 var button_sort = d3.select("body").append("input")
   .attr("type", "image")
-  .attr("src", "buttonsortvolume.png")
+  .attr("src", "buttonsort.png")
   .attr("class", "sortbutton")
   .attr("value", "Sort by Volume")
   .on("click", function() { sortBySize(); })
   .style("opacity", 0);
+
 
 var button_play = d3.select("body").append("input")
   .attr("type", "image")
@@ -691,10 +735,12 @@ function sortBySize(){
 
   if(sortedby == "map"){
     sortedby = "size";
-    button_sort.attr("src", "buttonsortmap.png");
+    button_sort_map.style("opacity", sortOpacityOff);
+    button_sort_volume.style("opacity", sortOpacityOn);
   } else {
     sortedby = "map";
-    button_sort.attr("src", "buttonsortvolume.png");
+    button_sort_map.style("opacity", sortOpacityOn);
+    button_sort_volume.style("opacity", sortOpacityOff);
   }
   
   d3.transition().duration(750)
@@ -717,7 +763,7 @@ function swap(){
   trackData.text(walkData[walkid]).style("opacity", 1);
   //trackData.style("opacity", 1);
 
-  button_sort.style("opacity", 1);
+  //button_sort.style("opacity", 0);
   button_play.style("opacity", .8);
 
   //var btn = d3.getElementById("input").filter(function(d){d.value=="Sort by Volume";});

@@ -203,6 +203,7 @@ div.buttons {
   top: 488px;
   left: 1010px;
   width: 140px;
+  opacity: 0;
 }
 
 .sortbuttonslash {
@@ -210,6 +211,7 @@ div.buttons {
   top: 488px;
   left: 1050px;
   width: 140px;
+  opacity: 0;
 }
 
 .sortbuttonvolume {
@@ -217,6 +219,7 @@ div.buttons {
   top: 488px;
   left: 1060px;
   width: 140px;
+  opacity: 0;
 }
 
 .line {
@@ -562,19 +565,19 @@ var bar_r = svg.append("text")
 var button_sort_map = d3.select("body").append("div")
   .attr("class", "sortbuttonmap")
   .text(function(){ return "map";})
-  .style("opacity", sortOpacityOn)
+  .style("opacity", 0)
   ;
 
 var button_sort_slash = d3.select("body").append("div")
   .attr("class", "sortbuttonslash")
   .text(function(){ return "/";})
-  .style("opacity", 1)
+  .style("opacity", 0)
   ;
 
 var button_sort_volume = d3.select("body").append("div")
   .attr("class", "sortbuttonvolume")
   .text(function(){ return "sort";})
-  .style("opacity", sortOpacityOff)
+  //.style("opacity", sortOpacityOff)
   ;
 
 var button_sort = d3.select("body").append("input")
@@ -757,6 +760,15 @@ function sortBySize(){
 function swap(){
 
   playstate = "pause";
+
+  button_sort_slash.style("opacity", 1);
+  if(sortedby == "map"){
+    button_sort_map.style("opacity", sortOpacityOn);
+    button_sort_volume.style("opacity", sortOpacityOff);
+  } else {
+    button_sort_map.style("opacity", sortOpacityOff);
+    button_sort_volume.style("opacity", sortOpacityOn);
+  }
 
   trackInfo.style("opacity", 0);
   trackDesc.text(walkText[walkid]).style("opacity", 1);

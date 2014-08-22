@@ -10,25 +10,41 @@ body {
   stroke: "white";
 }
 
+/*div.heading {
+  position: absolute;
+}*/
+
 h1 {
   text-align: left;
   font-size: 24px;
-  color: #666666;
+  color: #686868;
+  top: 100px;
+  padding-left: 10px
+}
+
+h2 {
+  text-align: left;
+  font-size: 16px;
+  color: #686868;
+  padding-left: 10px;
+  margin-top: -10px;
 }
 
 p {
   text-align: left;
-  font-size: 18px;
-  color: #666666;
+  font-size: 14px;
+  color: #686868;
+  padding-left: 10px;
+  margin-top: -10px;
+  padding-bottom: 0;
 }
-
-
 
 .intro {
   position: absolute;
+  text-align: center;
   font-size: 18px;
-  width: 200px;
-  left: 80px;
+  width: 230px;
+  left: 64px;
   top: 140px;
 }
 
@@ -195,8 +211,8 @@ div.buttons {
 <body>
 <div class="heading">
 <h1>myCitySounds</h1>
-<p>Soundmapping the Mission district. Recorded while walking between Stamen Design's studio and the Gray Area theater.<br />
-Kristin Henry, Gray Area Creative Code Fellow</p>
+<h2>Soundmapping the Mission district. Recorded while walking between Stamen Design's studio and the Gray Area theater</h2>
+<p>Kristin Henry, Gray Area Creative Code Fellow</p>
 </div>
 
 <script src="d3.v3.min.js"></script>
@@ -233,7 +249,8 @@ var lastwalk;
 var walkid, waveindex;
 var sortedby = "map";
 var playstate = "pause";
-var menuOpacity = .4;
+var menuOpacity = .6;
+var mapOpacity = .4;
 
 var lists = {};
 var trackIDs = [];
@@ -242,6 +259,7 @@ var howls = {};
 var trackwaves = {};
 var idsByTrack = {};
 var points = {};
+
 
 var walkText = {};
 walkText["track8"] = "Walking from Stamen to Gray Area, along Mission Street.";
@@ -297,13 +315,13 @@ var y2 = d3.scale.linear()
 
 
 var dx = function(i) { return 0; };
-var dy = function(i) { return 40*i -50; };
+var dy = function(i) { return 40*i -40; };
 
 var dx2 = function(d) { return x2(d) - 300; };
 var dy2 = function(d) { return y2(d) - 10; };
 
 var dx3 = function(d) { return d + 400; }; //d*4; } //d/10; }
-var dy3 = function(d) { return d + 200; };
+var dy3 = function(d) { return d + 120; };
 
 var minVmenu = d3.scale.linear()
   .range([2,10]);
@@ -317,11 +335,25 @@ var maxV = d3.scale.linear()
 var color = d3.scale.ordinal()
   // .range(["#2C4152", "#445870", "#5F708F",
   //         "#7E87B0", "#A0A0D1", "#C5B8F2"]);
+
   // .range(["#28505E", "#3E657B", "#597B99",
   //         "#7990B7", "#9DA4D5", "#C5B8F2"]);
  
-  .range(["#C5B8F2", "#9DA4D5", "#7990B7",
-          "#597B99", "#3E657B", "#28505E"]);
+  // .range(["#C5B8F2", "#9DA4D5", "#7990B7",
+  //         "#597B99", "#3E657B", "#28505E"]);
+  
+  // .range(["#8996C2", "#7189AE", "#5C7B9A",
+  //         "#486D86", "#375E72", "#28505E"]);
+
+  // .range(["#E4FC75", "#87D47F", "#42A783",
+  //         "#237776", "#264957", "#1E202C"]);
+
+  // .range(["#EAC154", "#91AB51", "#498C5C",
+  //         "#1D685E", "#1D424D", "#1E202C"]);
+
+  .range(["#709F56", "#41875E", "#216D5F",
+          " #1A5257", "#1F3845", "#1E202C"]);
+
 
 
 
@@ -337,7 +369,7 @@ var introText = d3.select("body").append("div")
   .attr("class", "intro")
   // .attr("x", 50)
   // .attr("y", 40)
-  .text(function(){return "Select a Walk:"})
+  .text(function(){return "Select Walk"})
   .style("fill", "grey")
   .style("opacity", 1);
 
@@ -469,9 +501,6 @@ svg.append("rect")
   .style("fill", "white");
 
 
-
-
-
 var gradient = svg.append("svg:defs")
   .append("svg:linearGradient")
   .attr("id", "gradient")
@@ -488,23 +517,23 @@ for(var i=0; i<colors.length; i++){
  
 // for gradient
 var bar = svg.append("rect")
-  .attr("x", 74)
+  .attr("x", 64)
   .attr("y", 530)
-  .attr("width", 220)
-  .attr("height", 12)
+  .attr("width", 230)
+  .attr("height", 18)
   .style("fill", "url(#gradient)")
   .style("opacity", .8);
 
 var bar_l = svg.append("text")
-  .attr("x", 50)
-  .attr("y", 538)
+  .attr("x", 40)
+  .attr("y", 543)
   .attr("font-size", 10)
   .style("text-anchor", "right")
   .text("1pm");
 
 var bar_r = svg.append("text")
   .attr("x", 300)
-  .attr("y", 538)
+  .attr("y", 543)
   .attr("font-size", 10)
   .style("text-anchor", "left")
   .text("6pm");
@@ -631,11 +660,12 @@ function getr(d){
 
 function getOpacity(d){
   if(d.walkid === walkid){
-    return .6;
+    return mapOpacity;
   } else {
     return menuOpacity;
   }
 }
+
 
 function gridPositions(track){
   // get relative positions in grid using linked list for this track
@@ -854,8 +884,8 @@ d3.csv("maxMinDateInfo_2.csv", function(error, data){
         .filter(function(d){ return d.walkid === trackIDs[i] ; })
         .attr("class", "dot")
         .attr("r", function(d){ return minV(d.min); }) //return d.min/1000; })
-        .attr("cx", function(d) { d.dx = dx(i); return d.x = x(d.lat); })
-        .attr("cy", function(d) { d.dy = dy(i); return d.y = y(d.lon); })
+        .attr("cx", function(d) { d.dx = dx(i); return d.x = 200;}) //x(d.lat); })
+        .attr("cy", function(d) { d.dy = dy(i); return d.y = 200;}) //y(d.lon); })
         .style("fill", function(d) { return color(d.hour); })
         .style("stroke", "white")
         .style("opacity", menuOpacity) //.2)
@@ -873,9 +903,7 @@ d3.csv("maxMinDateInfo_2.csv", function(error, data){
                 d3.selectAll(".dot")
                   .filter(function(d1){ return d1.walkid === d.walkid ; })
                   .style("opacity", .8)
-                  //.style("stroke", "black")
-                  .style("stroke-width", 1)
-                  ; 
+                  .style("stroke-width", 1); 
 
             } else{
 
@@ -999,7 +1027,7 @@ d3.csv("maxMinDateInfo_2.csv", function(error, data){
 
   var streetnames = ["Valencia", "Mission", "16th", "22nd"];
 
-  var maptext = svg.selectAll(".text")
+  svg.selectAll(".text")
           .data(streetnames)
           .enter()
           .append("text")

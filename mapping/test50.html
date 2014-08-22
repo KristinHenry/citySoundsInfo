@@ -27,10 +27,29 @@ p {
 
 .intro {
   position: absolute;
-  font-size: 12px;
+  font-size: 18px;
   width: 200px;
   left: 80px;
-  top: 40px;
+  top: 160px;
+}
+
+
+.trackdesc{
+  position: absolute;
+  font-size: 18px;
+  width: 500px;
+  left: 460px;
+  top: 160px;
+}
+
+
+
+.trackdata{
+  position:absolute;
+  top: 200px;
+  left: 460px;
+  font-size: 12px;
+  opacity: 0;
 }
 
 div.detail {
@@ -125,23 +144,7 @@ div.waveform {
   left: 10px;
 }
 
-div.trackdesc{
-  position: absolute;
-  /*top: 460px;*/
-  top: 170px;
-  left: 460px;
-  font-size: 18px;
-  opacity: 0;
 
-}
-
-div.trackdata{
-  position:absolute;
-  top: 200px;
-  left: 460px;
-  font-size: 12px;
-  opacity: 0;
-}
 
 div.trackInfo{
   position: absolute;
@@ -324,7 +327,16 @@ var svg = d3.select("body").append("svg")
     .style("margin-left", "auto")
     .style("margin-right", "auto");
 
+//var introText = svg.append("text")
+var introText = d3.select("body").append("div")
+  .attr("class", "intro")
+  // .attr("x", 50)
+  // .attr("y", 40)
+  .text(function(){return "Select a Walk:"})
+  .style("fill", "grey")
+  .style("opacity", 1);
 
+// just for debugging
 var trackInfo = d3.select("body").append("div")
   .attr("class", "trackInfo")
   .text(function(){return "trackInfo"})
@@ -336,6 +348,13 @@ var trackDesc = d3.select("body").append("div")
   .text(function(){ return "Walk Description ...";})
   .style("opacity", 0)
   ;
+
+
+// var trackDesc = svg.append("text")
+//   .attr("class", "trackdesc")
+//   .text(function(){return "Walk Descriptions...."})
+//   .style("fill", "grey")
+//   .style("opacity", 1);
 
 
 var trackData = d3.select("body").append("div")
@@ -445,13 +464,7 @@ svg.append("rect")
   .style("fill", "white");
 
 
-var introText = svg.append("text")
-  .attr("class", "intro")
-  .attr("x", 50)
-  .attr("y", 40)
-  .text(function(){return "Select a Walk:"})
-  .style("fill", "grey")
-  .style("opacity", 1);
+
 
 
 var gradient = svg.append("svg:defs")
@@ -473,7 +486,7 @@ var bar = svg.append("rect")
   .attr("x", 74)
   .attr("y", 530)
   .attr("width", 220)
-  .attr("height", 8)
+  .attr("height", 12)
   .style("fill", "url(#gradient)")
   .style("opacity", .8);
 

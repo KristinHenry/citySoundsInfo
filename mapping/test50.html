@@ -185,8 +185,8 @@ div.buttons {
   position: absolute;
   top: 480px;
   /*left: 460px;*/
-  left: 860px;
-  width: 140px;
+  left: 960px;
+  width: 35px;
   opacity: .4;
 }
 
@@ -544,7 +544,8 @@ var button_sort = d3.select("body").append("input")
 
 var button_play = d3.select("body").append("input")
   .attr("type", "image")
-  .attr("src", "buttonplay.png")
+  // .attr("src", "buttonplay.png")
+  .attr("src", "playbutton.jpg")
   .attr("class", "playbutton")
   .attr("value", "Play")
   .on("click", function() { playOnClick(); })
@@ -717,7 +718,7 @@ function swap(){
   //trackData.style("opacity", 1);
 
   button_sort.style("opacity", 1);
-  button_play.style("opacity", 1);
+  button_play.style("opacity", .8);
 
   //var btn = d3.getElementById("input").filter(function(d){d.value=="Sort by Volume";});
 

@@ -150,7 +150,7 @@ div.trackInfo{
   text-align: center;
   top: 200px;
   left: 10px;
-  opacity: 0;
+  opacity: 1;
 }
 
 label {
@@ -196,7 +196,7 @@ div.buttons {
 <div class="heading">
 <h1>myCitySounds</h1>
 <p>Soundmapping the Mission district. Recorded while walking between Stamen Design's studio and the Gray Area theater.<br />
--Kristin Henry, Gray Area Creative Code Fellow</p>
+Kristin Henry, Gray Area Creative Code Fellow</p>
 </div>
 
 <script src="d3.v3.min.js"></script>
@@ -315,10 +315,15 @@ var maxV = d3.scale.linear()
   .range([1, 30]);
 
 var color = d3.scale.ordinal()
-  .range(["#637939", "#8ca252", "#b5cf6b", "#cedb9c",
-          "#999999",
-          "#9c9ede", "#6b6ecf", "#5254a3", "#393b79",
-          "#636363"]);
+  // .range(["#2C4152", "#445870", "#5F708F",
+  //         "#7E87B0", "#A0A0D1", "#C5B8F2"]);
+  // .range(["#28505E", "#3E657B", "#597B99",
+  //         "#7990B7", "#9DA4D5", "#C5B8F2"]);
+ 
+  .range(["#C5B8F2", "#9DA4D5", "#7990B7",
+          "#597B99", "#3E657B", "#28505E"]);
+
+
 
 
 var svg = d3.select("body").append("svg")
@@ -502,7 +507,7 @@ var bar_r = svg.append("text")
   .attr("y", 538)
   .attr("font-size", 10)
   .style("text-anchor", "left")
-  .text("10pm");
+  .text("6pm");
 
 var button_sort = d3.select("body").append("input")
   .attr("type", "image")

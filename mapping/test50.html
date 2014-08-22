@@ -364,11 +364,8 @@ var svg = d3.select("body").append("svg")
     .style("margin-left", "auto")
     .style("margin-right", "auto");
 
-//var introText = svg.append("text")
 var introText = d3.select("body").append("div")
   .attr("class", "intro")
-  // .attr("x", 50)
-  // .attr("y", 40)
   .text(function(){return "Select Walk"})
   .style("fill", "grey")
   .style("opacity", 1);
@@ -497,7 +494,6 @@ function getLabel(d){
 svg.append("rect")
   .attr("width", width + margin.left + margin.right)
   .attr("height", height + margin.top + margin.bottom)
-  //.style("stroke", "#c7c7c7")
   .style("fill", "white");
 
 
@@ -558,13 +554,8 @@ var button_play = d3.select("body").append("input")
 var detail = d3.select("body").append("div")
     .attr("class", "detail");
 
-// var detail_info = detail.append("span") 
-//     .attr("class", "d_info")
-//     .text(function(){ return "details here";})
-//     .style("opacity", 0);
 
 var detail_circ = svg.append("circle")
-  //.attr("class", "d_circ")
   .attr("cx", function(){ return 100; })
   .attr("cy", function(){ return 100; })
   .attr("r", 2)
@@ -572,12 +563,10 @@ var detail_circ = svg.append("circle")
   .style("opacity", 0);
 
 var detail_ln1 = svg.append("line")
-  //.attr("class", "d_ln1")
   .attr("x1", function(){ return 100; })
   .attr("y1", function(){ return 100; })
   .attr("x2", function(){ return 500; }) 
   .attr("y2", function(){ return 500; })
-  //.style("opacity", .2)
   .style("stroke-width", 4)
   .style('stroke', "#c7c7c7")
   .style("opacity", 0);
@@ -596,32 +585,26 @@ var wf_info1 = wf.append("span")
       .text("wave form");
 var wf_info1a = wf.append("span") 
       .attr("class", "wf_info1a")
-      // .text(function(){ return "wave form";});
       .text("wave form");
 
 var wf_info1b = wf.append("span") 
       .attr("class", "wf_info1b")
-      // .text(function(){ return "wave form";});
       .text("wave form");
 
 var wf_info2 = wf.append("span") 
       .attr("class", "wf_info2")
-      // .text(function(){ return "wave form";});
       .text("wave form");
 var wf_info2a = wf.append("span") 
       .attr("class", "wf_info2a")
-      // .text(function(){ return "wave form";});
       .text("wave form");
 
 var wf_info2b = wf.append("span") 
       .attr("class", "wf_info2b")
-      // .text(function(){ return "wave form";});
       .text("wave form");
  
 
 var wf_image = wf.append("img")
       .attr("class", "wf_img")
-      //.attr("src", waveimg)
       .attr("width", 300)
       .attr("height", 300);
 
@@ -669,9 +652,7 @@ function getOpacity(d){
 
 function gridPositions(track){
   // get relative positions in grid using linked list for this track
-
   var maxX = 700;
- 
   var list = lists[track];
 
   var node = list.start;
@@ -701,7 +682,6 @@ function gridPositions(track){
 }
 
 
-//function sortBySize(id){
 function sortBySize(){
 
   id = button_sort;

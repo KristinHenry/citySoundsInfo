@@ -3,6 +3,7 @@
 <style>
 
 body {
+  /*background-color: #635c5c;*/
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
 }
 
@@ -10,23 +11,19 @@ body {
   stroke: "white";
 }
 
-/*div.heading {
-  position: absolute;
-}*/
-
 h1 {
   text-align: left;
-  font-size: 24px;
+  font-size: 34px;
   color: #686868;
   top: 100px;
-  padding-left: 10px
+  padding-left: 40px
 }
 
 h2 {
   text-align: left;
   font-size: 16px;
   color: #686868;
-  padding-left: 10px;
+  padding-left: 40px;
   margin-top: -10px;
 }
 
@@ -34,7 +31,7 @@ p {
   text-align: left;
   font-size: 14px;
   color: #686868;
-  padding-left: 10px;
+  padding-left: 40px;
   margin-top: -10px;
   padding-bottom: 0;
 }
@@ -183,41 +180,42 @@ div.buttons {
 
 .playbutton {
   position: absolute;
-  top: 480px;
+  /*top: 480px;*/
+  top: 132px;
   /*left: 460px;*/
-  left: 960px;
+  left: 990px;
   width: 35px;
   opacity: .4;
 }
 
 .sortbutton {
   position: absolute;
-  top: 480px;
-  left: 1000px;
+  top: 132px;
+  left: 1020px;
   width: 140px;
   opacity: 0;
 }
 
 .sortbuttonmap {
   position: absolute;
-  top: 488px;
-  left: 1010px;
+  top: 140px;
+  left: 1050px;
   width: 140px;
   opacity: 0;
 }
 
 .sortbuttonslash {
   position: absolute;
-  top: 488px;
-  left: 1050px;
+  top: 140px;
+  left: 1090px;
   width: 140px;
   opacity: 0;
 }
 
 .sortbuttonvolume {
   position: absolute;
-  top: 488px;
-  left: 1060px;
+  top: 140px;
+  left: 1100px;
   width: 140px;
   opacity: 0;
 }
@@ -337,14 +335,14 @@ var x2 = d3.scale.linear()
   .range([width_menu+ 300, width + 200]);
 
 var y2 = d3.scale.linear()
-    .range([80, 280]);
+    .range([180, 380]);
 
 
 var dx = function(i) { return 0; };
 var dy = function(i) { return 40*i -40; };
 
 var dx2 = function(d) { return x2(d) - 300; };
-var dy2 = function(d) { return y2(d) - 10; };
+var dy2 = function(d) { return y2(d) - 100; };
 
 var dx3 = function(d) { return d + 400; }; //d*4; } //d/10; }
 var dy3 = function(d) { return d + 120; };
@@ -358,29 +356,54 @@ var minV = d3.scale.linear()
 var maxV = d3.scale.linear()
   .range([1, 30]);
 
+
+function getx(d){
+  if(d.walkid === walkid){
+    if(sortedby === "map"){
+      return dx2(d.lat);
+    } else {
+      return dx3(d.gridx) + minV(d.min)/2;
+    }
+  } else {
+    return x(d.lat) - d.dx;
+  }
+}
+
+function gety(d){
+  if(d.walkid === walkid){
+    if(sortedby === "map"){
+      return dy2(d.lon);
+    } else {
+      return dy3(d.gridy);
+    }
+  } else {
+    return y(d.lon) + d.dy;
+  }
+}
+
+function getr(d){
+  if(d.walkid === walkid){
+    return minV(d.min);
+  } else {
+    return minVmenu(d.min);
+  }
+}
+
+function getOpacity(d){
+  if(d.walkid === walkid){
+    return mapOpacity;
+  } else {
+    return menuOpacity;
+  }
+}
+
 var color = d3.scale.ordinal()
-  // .range(["#2C4152", "#445870", "#5F708F",
-  //         "#7E87B0", "#A0A0D1", "#C5B8F2"]);
-
-  // .range(["#28505E", "#3E657B", "#597B99",
-  //         "#7990B7", "#9DA4D5", "#C5B8F2"]);
- 
-  // .range(["#C5B8F2", "#9DA4D5", "#7990B7",
-  //         "#597B99", "#3E657B", "#28505E"]);
-  
-  // .range(["#8996C2", "#7189AE", "#5C7B9A",
-  //         "#486D86", "#375E72", "#28505E"]);
-
-  // .range(["#E4FC75", "#87D47F", "#42A783",
-  //         "#237776", "#264957", "#1E202C"]);
-
-  // .range(["#EAC154", "#91AB51", "#498C5C",
-  //         "#1D685E", "#1D424D", "#1E202C"]);
-
-  .range(["#709F56", "#41875E", "#216D5F",
-          " #1A5257", "#1F3845", "#1E202C"]);
-
-
+    .range(["#a6bddb", "#67a9cf", "#3690c0", "#02818a", "#016c59", "#014636"]);
+    
+    //.range(["#8996C2", "#7189AE", "#5C7B9A", "#486D86", "#375E72", "#28505E"]);
+    //.range(["#709F56", "#41875E", "#216D5F", " #1A5257", "#1F3845", "#1E202C"]);
+    //.range(["#A6A4D6", "#8788B2", "#6A6D8F", "#50536E", "#373A4E", "#202330"]);
+    //.range(["#7fcdbb", "#41b6c4", "#1d91c0", "#225ea8", "#253494", "#081d58"]);
 
 
 
@@ -408,13 +431,6 @@ var trackDesc = d3.select("body").append("div")
   .text(function(){ return "Walk Description ...";})
   .style("opacity", 0)
   ;
-
-
-// var trackDesc = svg.append("text")
-//   .attr("class", "trackdesc")
-//   .text(function(){return "Walk Descriptions...."})
-//   .style("fill", "grey")
-//   .style("opacity", 1);
 
 
 var trackData = d3.select("body").append("div")
@@ -454,14 +470,12 @@ function onEnd(){
       .style("opacity", .2);
     }
 
-    console.log("tid: " + tid);
-    console.log("last tid: " + lasttid);
     var dot = svg.selectAll(".dot")
       .filter(function(d){ return d.id === tid; })
       .style("fill", function(d){
-          //console.log("d.id: " + d.id); 
           drawDetails(d, getx(d), gety(d));
-          return "red";});
+          return "red";})
+      .style("opacity", 1);
 
     lasttid = tid;
 
@@ -507,20 +521,11 @@ function sortWavesForTracks(){
 }
 
 
-function getLabel(d){
-      if(d-12 >=0){
-        return d-12 + "pm"
-      } else {
-        return d + "am"
-      }
-}
-
-
-
 svg.append("rect")
   .attr("width", width + margin.left + margin.right)
   .attr("height", height + margin.top + margin.bottom)
   .style("fill", "white");
+  //.style("fill", "#635c5c");
 
 
 var gradient = svg.append("svg:defs")
@@ -529,11 +534,12 @@ var gradient = svg.append("svg:defs")
   .attr("spreadMethod", "pad");
 
 var colors = color.range(); 
-var gap = 100/(colors.length - 1);
+var gap = 100/(colors.length);
 for(var i=0; i<colors.length; i++){
   gradient.append("svg:stop")
     .attr("offset", i * gap + "%")
     .attr("stop-color", colors[i])
+    //.attr("spreadMethod", "pad")
     .attr("stop-opacity", 1);
 }
  
@@ -565,20 +571,16 @@ var bar_r = svg.append("text")
 var button_sort_map = d3.select("body").append("div")
   .attr("class", "sortbuttonmap")
   .text(function(){ return "map";})
-  .style("opacity", 0)
-  ;
+  .style("opacity", 0);
 
 var button_sort_slash = d3.select("body").append("div")
   .attr("class", "sortbuttonslash")
   .text(function(){ return "/";})
-  .style("opacity", 0)
-  ;
+  .style("opacity", 0);
 
 var button_sort_volume = d3.select("body").append("div")
   .attr("class", "sortbuttonvolume")
-  .text(function(){ return "sort";})
-  //.style("opacity", sortOpacityOff)
-  ;
+  .text(function(){ return "sort";});
 
 var button_sort = d3.select("body").append("input")
   .attr("type", "image")
@@ -657,45 +659,7 @@ var wf_image = wf.append("img")
       .attr("height", 300);
 
 
-function getx(d){
-  if(d.walkid === walkid){
-    if(sortedby === "map"){
-      return dx2(d.lat);
-    } else {
-      return dx3(d.gridx) + minV(d.min)/2;
-    }
-  } else {
-    return x(d.lat) - d.dx;
-  }
-}
 
-function gety(d){
-  if(d.walkid === walkid){
-    if(sortedby === "map"){
-      return dy2(d.lon);
-    } else {
-      return dy3(d.gridy);
-    }
-  } else {
-    return y(d.lon) + d.dy;
-  }
-}
-
-function getr(d){
-  if(d.walkid === walkid){
-    return minV(d.min);
-  } else {
-    return minVmenu(d.min);
-  }
-}
-
-function getOpacity(d){
-  if(d.walkid === walkid){
-    return mapOpacity;
-  } else {
-    return menuOpacity;
-  }
-}
 
 
 function gridPositions(track){
@@ -757,6 +721,9 @@ function sortBySize(){
 
 
 
+// walkid = trackIDs[0]; 
+// var interval = setInterval(swap(), 3000*10);
+
 function swap(){
 
   playstate = "pause";
@@ -773,17 +740,8 @@ function swap(){
   trackInfo.style("opacity", 0);
   trackDesc.text(walkText[walkid]).style("opacity", 1);
   trackData.text(walkData[walkid]).style("opacity", 1);
-  //trackData.style("opacity", 1);
 
-  //button_sort.style("opacity", 0);
   button_play.style("opacity", .8);
-
-  //var btn = d3.getElementById("input").filter(function(d){d.value=="Sort by Volume";});
-
-  //document.getElementById("Sort").disabled=false;
-  //d3.select("Sort").attr("opacity", 1);
-
-  //Sort.attr("disabled", "false");
  
   d3.transition().duration(750)
     .selectAll(".dot")
@@ -804,9 +762,6 @@ function drawDetails(d, cx, cy){
   wf_image.attr("src", imgpath);
 
   wf.style("opacity", 1);
-
-  //text.append("tspan").attr("x", 0).attr("y", y)
-  //  .attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
 
   var h = 0;
   wf_info1.text("Location");
@@ -921,6 +876,7 @@ d3.csv("maxMinDateInfo_2.csv", function(error, data){
 
       var dot = dots.append("circle")
         .filter(function(d){ return d.walkid === trackIDs[i] ; })
+        .sort(function(d){ return function(a,b){ return  Number(points[b].min) - Number(points[a].min); } })
         .attr("class", "dot")
         .attr("r", function(d){ return minV(d.min); }) //return d.min/1000; })
         .attr("cx", function(d) { d.dx = dx(i); return d.x = 200;}) //x(d.lat); })
@@ -948,10 +904,10 @@ d3.csv("maxMinDateInfo_2.csv", function(error, data){
 
                 trackInfo.style("opacity", 0);
 
-                drawDetails(d, d3.select(this).attr("cx"), d3.select(this).attr("cy"));                  
+                drawDetails(d, d3.select(this).attr("cx"), d3.select(this).attr("cy"));              
 
                 d3.select(this)
-                  //.style("fill", "red")
+                  .style("fill", "red")
                   .style("stroke-width", 2)
                   .style("opacity", 1);
 
@@ -986,7 +942,7 @@ d3.csv("maxMinDateInfo_2.csv", function(error, data){
                   .style("stroke", "white")
                   .style("stroke-width", 1)
                   .style("opacity", .2)
-                  //.style("fill", function(d) { return color(d.hour); })
+                  .style("fill", function(d) { return color(d.hour); })
                   ;
 
                 hideDetails();
@@ -1023,23 +979,42 @@ d3.csv("maxMinDateInfo_2.csv", function(error, data){
       d3.select("input").property("checked", true).each(changeView);
       }, 250);
 
+    
+
     function changeView(){
       clearTimeout(sortTimeout);
 
       (this.checked) ? this.parentNode.childNodes[1].nodeValue = "Stretched View" : this.parentNode.childNodes[1].nodeValue = "Stacked View";
 
-      var transition = svg.transition().duration(750);
+      var transition0 = svg.transition().duration(750);
+      var transition1 = transition0.transition().duration(750);
 
-      (this.checked) ?
-          transition.selectAll(".dot")
+      if(this.checked){
+
+          // console.log(walkid);
+          // swap();
+          transition0.selectAll(".dot")
             .attr("cx", function(d){ return x(d.lat) - d.dx; })
             .attr("cy", function(d){ return y(d.lon) + d.dy; })
-            .attr("r", function(d){ return minVmenu(d.min); })
+            .attr("r", function(d){ return minVmenu(d.min); });
+
+          
+      }
+
+     
+
+
+
+      // (this.checked) ?
+      //     transition.selectAll(".dot")
+      //       .attr("cx", function(d){ return x(d.lat) - d.dx; })
+      //       .attr("cy", function(d){ return y(d.lon) + d.dy; })
+      //       .attr("r", function(d){ return minVmenu(d.min); })
             
-      :
-          transition.selectAll(".dot")
-            .attr("cx", function(d){ return x(d.lat); })
-            .attr("cy", function(d){ return y(d.lon); });
+      // :
+      //     transition.selectAll(".dot")
+      //       .attr("cx", function(d){ return x(d.lat); })
+      //       .attr("cy", function(d){ return y(d.lon); });
             
     }
 

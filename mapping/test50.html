@@ -88,8 +88,8 @@ div.detail {
 
 div.waveform {
   position: absolute;
-  top: 380px;
-  left: 830px;
+  top: 490px;
+  left: 850px;
   height: 300px;
   padding: 10px;
   opacity: .4;
@@ -102,7 +102,7 @@ div.waveform {
   text-align: left; 
   font-weight: bold;
   width: 200px;
-  top: 100px;
+  top: 0px;
   left: -110px;
 }
 .wf_info1a{
@@ -110,7 +110,7 @@ div.waveform {
   position: absolute;
   text-align: left; 
   width: 200px;
-  top: 120px;
+  top: 20px;
   left: -110px;
 }
 .wf_info1b{
@@ -118,7 +118,7 @@ div.waveform {
   position: absolute;
   text-align: left; 
   width: 200px;
-  top: 140px;
+  top: 40px;
   left: -110px;
 }
 
@@ -128,7 +128,7 @@ div.waveform {
   text-align: left; 
   font-weight: bold;
   width: 200px;
-  top: 200px;
+  top: 80px;
   left: -110px;
 }
 .wf_info2a{
@@ -136,7 +136,7 @@ div.waveform {
   position: absolute;
   text-align: left; 
   width: 200px;
-  top: 220px;
+  top: 100px;
   left: -110px;
 }
 .wf_info2b{
@@ -144,15 +144,15 @@ div.waveform {
   position: absolute;
   text-align: left; 
   width: 200px;
-  top: 240px;
+  top: 120px;
   left: -110px;
 }
 
 .wf_img {
   position: absolute;
-  width: 300px;
-  height: 300px;
-  top: 0px;
+  width: 250px;
+  height: 250px;
+  top: -60px;
   left: 10px;
 }
 
@@ -353,7 +353,7 @@ var dx2 = function(d) { return x2(d) - 300; };
 var dy2 = function(d) { return y2(d) - 100; };
 
 var dx3 = function(d) { return d + 400; }; //d*4; } //d/10; }
-var dy3 = function(d) { return d + 120; };
+var dy3 = function(d) { return d + 80; };
 
 var minVmenu = d3.scale.linear()
   .range([2,10]);
@@ -678,7 +678,7 @@ var wf_image = wf.append("img")
 
 function gridPositions(track){
   // get relative positions in grid using linked list for this track
-  var maxX = 700;
+  var maxX = 760;
   var list = lists[track];
 
   var node = list.start;

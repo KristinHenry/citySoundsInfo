@@ -89,7 +89,7 @@ div.detail {
 div.waveform {
   position: absolute;
   top: 380px;
-  left: 870px;
+  left: 830px;
   height: 300px;
   padding: 10px;
   opacity: .4;
@@ -361,6 +361,12 @@ var minVmenu = d3.scale.linear()
 var minV = d3.scale.linear()
   .range([1, 30]);
 
+var avgVmenu = d3.scale.linear()
+  .range([2,10]);
+
+var avgV = d3.scale.linear()
+  .range([1, 30]);
+
 var maxV = d3.scale.linear()
   .range([1, 30]);
 
@@ -370,7 +376,7 @@ function getx(d){
     if(sortedby === "map"){
       return dx2(d.lat);
     } else {
-      return dx3(d.gridx) + minV(d.min)/2;
+      return dx3(d.gridx) + avgV(d.avg)/2;//minV(d.min)/2;
     }
   } else {
     return x(d.lat) - d.dx;
@@ -391,9 +397,9 @@ function gety(d){
 
 function getr(d){
   if(d.walkid === walkid){
-    return minV(d.min);
+    return avgV(d.avg); //minV(d.min);
   } else {
-    return minVmenu(d.min);
+    return avgVmenu(d.avg); //minVmenu(d.min);
   }
 }
 
@@ -687,11 +693,14 @@ function gridPositions(track){
       var thisdata = node.data;
       var lastdata = node.last.data;
 
-      if((lastdata.gridx + minV(lastdata.min)) > maxX){
+      // if((lastdata.gridx + minV(lastdata.min)) > maxX){
+      if((lastdata.gridx + avgV(lastdata.avg)) > maxX){
         thisdata.gridx = 0;
-        thisdata.gridy = lastdata.gridy + 2*minV(lastdata.min) + 4;
+        // thisdata.gridy = lastdata.gridy + 2*minV(lastdata.min) + 4;
+        thisdata.gridy = lastdata.gridy + 2*avgV(lastdata.avg) + 4;
       } else {
-        thisdata.gridx = Math.floor(lastdata.gridx + minV(2 * lastdata.min) + 4);
+        // thisdata.gridx = Math.floor(lastdata.gridx + minV(2 * lastdata.min) + 4);
+        thisdata.gridx = Math.floor(lastdata.gridx + avgV(2 * lastdata.avg) + 4);
         thisdata.gridy = lastdata.gridy;
       }
     }
@@ -804,6 +813,7 @@ d3.csv("maxMinDateInfo_2.csv", function(error, data){
       d.lon = +d.lon;
       d.max = Math.floor(+d.max);
       d.min = Math.floor(+d.min);
+      d.avg = Math.floor(+d.avg);
       d.weekday = d.dayofweek;
       d.wave = "waves/" + d.walkid + "/" + d.id + ".wav";
 
@@ -836,6 +846,8 @@ d3.csv("maxMinDateInfo_2.csv", function(error, data){
 
     minVmenu.domain(d3.extent(data, function(d){ return d.min;})).nice();
     minV.domain(d3.extent(data, function(d){ return d.min;})).nice();
+    avgVmenu.domain(d3.extent(data, function(d){ return d.avg;})).nice();
+    avgV.domain(d3.extent(data, function(d){ return d.avg;})).nice();
     maxV.domain(d3.extent(data, function(d){ return d.max;})).nice();
 
     trackIDs = d3.set(tempArr).values();
@@ -861,7 +873,8 @@ d3.csv("maxMinDateInfo_2.csv", function(error, data){
 
       var trackids = idsByTrack[trackIDs[i]];
       trackids.sort(function(a,b){
-        return Number(points[a].min) - Number(points[b].min);    
+        // return Number(points[a].min) - Number(points[b].min);   
+        return Number(points[a].avg) - Number(points[b].avg);   
       })
 
 
@@ -884,9 +897,10 @@ d3.csv("maxMinDateInfo_2.csv", function(error, data){
 
       var dot = dots.append("circle")
         .filter(function(d){ return d.walkid === trackIDs[i] ; })
-        .sort(function(d){ return function(a,b){ return  Number(points[b].min) - Number(points[a].min); } })
+        // .sort(function(d){ return function(a,b){ return  Number(points[b].min) - Number(points[a].min); } })
+        .sort(function(d){ return function(a,b){ return  Number(points[b].avg) - Number(points[a].avg); } })
         .attr("class", "dot")
-        .attr("r", function(d){ return minV(d.min); }) //return d.min/1000; })
+        .attr("r", function(d){ return avgV(d.avg); })//minV(d.min); }) //return d.min/1000; })
         .attr("cx", function(d) { d.dx = dx(i); return d.x = 200;}) //x(d.lat); })
         .attr("cy", function(d) { d.dy = dy(i); return d.y = 200;}) //y(d.lon); })
         .style("fill", function(d) { return color(d.hour); })
@@ -1004,7 +1018,8 @@ d3.csv("maxMinDateInfo_2.csv", function(error, data){
           transition0.selectAll(".dot")
             .attr("cx", function(d){ return x(d.lat) - d.dx; })
             .attr("cy", function(d){ return y(d.lon) + d.dy; })
-            .attr("r", function(d){ return minVmenu(d.min); });
+            .attr("r", function(d){ return avgVmenu(d.avg); });
+            // .attr("r", function(d){ return minVmenu(d.min); });
 
           
       }

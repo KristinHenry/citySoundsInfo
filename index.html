@@ -95,8 +95,13 @@
           <h2>3</h2>
         </div>
         <div class="col-md-8">
-          <h2>Data Collection</h2>
-          <p>-- coming soon --  walking, and recording...sampling; while statistical, is such a small part of data collection...As i walk, there are smells, and sights, and wind and heat, and sounds. and I took small samples of sound. Can't get whole picture, so going statistical. small sample-keyed to small geolocation. don't want to capture entire conversations...</p>
+          <h2>Data Collection &amp; Analysis</h2>
+          <p>Since there wasn’t enough time to add geolocation features to the app I’d developed for my previous research, I looked for an app that came closest to what I needed.  The OSM tracker had the essential features: audio recording with timestamp and geolocation.</p>
+          <p>It also displayed estimated gps accuracy. This came in handy, as I learned about gps and how signals bounce against buildings making positioning less accurate.  In my walks, I tried to stay as far from buildings as I could. This helped with better accuracy, which ranged from 3-10 meters, but usually around 4 meters.</p>
+          <p>In my previous research, audio was sampled once per minute. As I started collecting data while walking, it became clear that this wasn’t nearly frequent enough. After trying several intervals, five seconds worked out best. Sampling, instead of continual recordings, was done for a statistical approach and also to avoid recording entire conversations.</p>
+          <p>Between the Stamen studio and the Gray Area theater, I’d walk on either Mission street or Valencia street. As I walked, I would count seconds, and press the record button when about five seconds had passed. It became somewhat meditative for me.  Over the days, I became more aware of the specific sounds around me.</p>
+          <p>Once I had audio samples, I could start working on the code for analyzing them. Data for each walk was transferred from the phone to laptop via usb cable. Android stores audio files in a format that has to be converted to another format before it can be played back. I used  ffmpeg with a shell script to convert the files. Most of the code for analysis and some visualizations of the audio files was written with Python, using various scientific and FFT code libraries.</p>
+          <p>Technical description and source code, mostly python, is online in the <a href="https://github.com/KristinHenry/myCitySoundsViz">myCitySoundsViz</a> repo.
 
         </div> 
       </div>
@@ -108,13 +113,32 @@
         </div>
         <div class="col-md-8">
           <h2>Visualizing Audio</h2>
-          <p>-- coming soon --</p>
+          <p>My first visualizations were of individual audio files. I’m fascinated with the audio waveforms, and how different types of sounds have different shapes.  Incorporating these in the final project was on my mind from the beginning.</p>
           <img src="imgs/wave1.jpg" alt="waveform noise" height="230" width="300">
-          <img src="imgs/wave5.jpg" alt="waveform noise" height="230" width="300">
           <img src="imgs/wave2.jpg" alt="waveform" height="230" width="300">
-          <img src="imgs/wave3.jpg" alt="waveform" height="230" width="300">
+          <p>The early days of the fellowship were filled with brainstorming and sketching. Thinking of ways to incorporate the waveforms, one of my early sketches looked very much like a electrical circuit.</p>
+          <img src="imgs/soundCircuit.jpg" alt="sound circuit sketch" height="300" width="1000">
+          <p>I also experimented a bit with processing.js and playing with the idea of audio bubbles bouncing around. This was a lot of fun, and reminded of my days coding particle systems in AS3.</p>
+          <p><img src="imgs/dotsSketch.jpg" alt="audio bubble sketch" height="490" width="350"></p>       
+          <p>Identifying different type of sounds could have led to another dimension to the visualization.  Listening and classifying each recording took a long time, and only a couple walks were analyzed this way.  Doing the classification automatically would make this much faster, but there wasn’t enough time to develop the code for it. </p>
+          <p>I did get a good start though, and while learning about audio fingerprinting I learned bit about signal processing and generating spectrographs. These show much more detail than waveforms, and can be used to classify audio recordings. They can also be very beautiful.</p>
+          <img src="imgs/doyouknowwhereyouare_tiny.jpg" alt="waveform" height="400" width="1000">
+          <p>Once I had some recorded walks to work with, I started experimenting with mapping them. At first, it was just placing markers for samples in relative positions. The visualization took shape slowly, first for one walk, and then for several.</p>
+          <img src="imgs/screen_1.png" alt="waveform" height="230" width="300">
+          <img src="imgs/screen_4.png" alt="waveform" height="230" width="300">
+          <p>At first, I was thinking that each recording would be classified, and the dots could be colored according to what type of sound it was.  But after experimenting with emphasizing individual walks, rather than aggregating the samples, I decided to go with using color to signify which samples were from the same walk.</p>
+          <img src="imgs/screen_5.png" alt="waveform" height="230" width="300">
+          <p>This led to experimenting with showing “menu” of walks, instead of showing all the data at once. Offsetting the position of each walk looked interesting, but wasn’t very useful for looking at one walk at a time. Adding relative noise levels for each sample, created some interesting patterns.</p>
+          <img src="imgs/screen_6.png" alt="waveform" height="230" width="300">
+          <img src="imgs/screen_2.png" alt="waveform" height="230" width="300">
+          <p>Decided to make a “menu” of walks, that could be examined in detail. Make them playable...like a song. Drawing a few streets and label them, to provide context.</p>
+          <p>Still wanted to show the waveforms of each audio sample, so included these in the details view for each sample. Details are visible when mousing over a mapped do, and when the walk’s recordings are played back.</p>
+          <img src="imgs/screenshot2.png" alt="waveform" height="400" width="900">
+          <p>One unexpected observation, when I started visualizing recordings on the map: I realized I was walking on Valencia street much more than Mission.  Why? Well, the block of Mission between 16th and 17th streets is ...well, there’s a lot of crime on that block.</p>
+          <a href="http://sanfrancisco.crimespotting.org/#types=AA,Mu,Ro,SA,DP,Na,Al,Pr&lat=37.764&dtstart=2014-07-18T08:45:54-07:00&lon=-122.418&dtend=2014-08-13T14:38:36-07:00&hours=0-23&zoom=17"><img src="imgs/crimespotting2.png" alt="waveform" height="200" width="500"></a>
+          <p>Once I noticed I’d been leaving out a big area in my project, I changed my pattern and walked to Gray Area along Mission street. If I stayed on the Eastern side of the street, especially between 16th and 17th streets, it <em>seemed</em> safer.</p>
+          <p>Working with the team at Stamen was fantastic. Coming from a science and engineering background, I’d never had access to so much design talent before. The feedback I received helped shape the visualizations. It helped me step away from the details of the data and see the big picture, to get from “engineer art” to a much better design.</p>
 
-          <p>Technical description and source code, mostly python, is online in the <a href="https://github.com/KristinHenry/myCitySoundsViz">myCitySoundsViz</a> repo.
 
         </div> 
       </div>
@@ -126,9 +150,8 @@
         </div>
         <div class="col-md-8">
           <h2>Challenges</h2>
-          <p>-- coming soon -- technical and creative...my background in science, so instinct is to tell the science...but need to tell story that engages an audience...more than just research, but story telling...why would anyone care? why would anyone interact with the visualization? </p>
-
-          <p>-- types of audio...traffic noise, voices, music, etc...signal processing: time to code vs time constraints of project. --> categorized subset of data, manually...listened to sample by sample and assigned tags.</p>
+          <p>For me, the greatest challenge was creative...about finding the story. I’m happy rooting around in  a dataset and finding new ways of exploring that data. But finding a way to share those discoveries with others, in a way that makes sense outside of my own brain? That’s a major challenge. It’s the age old challenge of good storytelling. </p>
+          <p>The time constraints were something I kept facing. Many ideas couldn’t be followed through on, because there wasn’t enough time. Sound classification being the one I most wish I’d had more time for.</p>
 
         </div> 
       </div>

@@ -1,36 +1,27 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
+
 <style>
-
 body {
-  /*background-color: #635c5c;*/
+  background-color: #635c5c;
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
-}
-
-.dot {
-  stroke: "white";
+  text-align: left;
 }
 
 h1 {
-  text-align: left;
   font-size: 34px;
-  color: #686868;
-  top: 100px;
-  padding-left: 40px
+  padding-left: 40px;
+  top: 100px; 
 }
 
 h2 {
-  text-align: left;
   font-size: 16px;
-  color: #686868;
   padding-left: 40px;
   margin-top: -10px;
 }
 
 p {
-  text-align: left;
   font-size: 14px;
-  color: #686868;
   padding-left: 40px;
   margin-top: -10px;
   padding-bottom: 0;
@@ -50,46 +41,20 @@ p {
   position: absolute;
   font-size: 18px;
   width: 500px;
-  left: 460px;
   top: 140px;
 }
-
-
 
 .trackdata{
   position:absolute;
   top: 180px;
-  left: 460px;
   font-size: 12px;
-  opacity: 0;
-}
-
-div.detail {
-  position: absolute;
-}
-
-.d_info{
-  font: 16px;
-  position: absolute;
-  text-align: left; 
-  width: 100px;
-  top: 100px;
-  left: 10px;
-}
-
-.d_circ {
-  position: absolute;
-}
-
-.d_ln1 {
-  position: absolute;
 }
 
 
 div.waveform {
   position: absolute;
   top: 490px;
-  left: 850px;
+  /*left: 850px;*/
   height: 300px;
   padding: 10px;
   opacity: .4;
@@ -154,6 +119,7 @@ div.waveform {
   height: 250px;
   top: -60px;
   left: 10px;
+  background:transparent;
 }
 
 
@@ -181,56 +147,40 @@ div.buttons {
 .playbutton {
   position: absolute;
   top: 480px;
-  /*top: 132px;*/
-  left: 460px;
-  /*left: 990px;*/
   width: 35px;
   opacity: .4;
 }
 
 .sortbutton {
   position: absolute;
-  /*top: 132px;*/
-  /*left: 1020px;*/
   top: 480px;
-  left: 490px;
   width: 140px;
   opacity: 0;
 }
 
 .sortbuttonmap {
   position: absolute;
-  /*top: 140px;*/
-  /*left: 1050px;*/
   top: 488px;
-  left: 510px;
   width: 140px;
   opacity: 0;
 }
 
 .sortbuttonslash {
   position: absolute;
-  /*top: 140px;*/
-  /*left: 1090px;*/
   top: 488px;
-  left: 550px;
   width: 140px;
   opacity: 0;
 }
 
 .sortbuttonvolume {
   position: absolute;
-  /*top: 140px;*/
-  /*left: 1100px;*/
   top: 488px;
-  left: 560px;
   width: 140px;
   opacity: 0;
 }
 
 .line {
   fill: none;
-  stroke: gray;
   stroke-width: 1.5px;
 }
 
@@ -250,6 +200,7 @@ div.buttons {
 
 
 <script>
+
 //-------------------------------------------------
 function LinkedList() {
   LinkedList.makeNode = function() {
@@ -275,6 +226,44 @@ function LinkedList() {
 }
 //-------------------------------------------------
 
+
+var online = {
+  "background": "#FFFFFF",
+  "color": "#686868",
+  "linecolor": "c7c7c7",
+  "linewidth": "4px",
+  "width": "1240",
+  "height": "550",
+  "xmin": 40, 
+  "xmax" : 300,
+  "ymin": 100,
+  "ymax": 120,
+  "x2min": 400,
+  "x2max": 1100,
+  "xwf": 850
+  
+};
+
+var onwall = {
+  "background": "#333333",
+  "color": "#dddddd",
+  "linecolor": "c7c7c7",
+  "linewidth": "4px",
+  "width": "1240",
+  "height": "550",
+  "xmin": 40, 
+  "xmax" : 300,
+  "ymin": 100,
+  "ymax": 120,
+  "x2min": 300,
+  "x2max": 900,
+  "xwf": 700 
+  
+}
+
+var settings = online;  // change to onwallV, if in installation
+//var settings = onwall;
+
 var lastwalk;
 var walkid, waveindex;
 var sortedby = "map";
@@ -291,6 +280,108 @@ var howls = {};
 var trackwaves = {};
 var idsByTrack = {};
 var points = {};
+
+document.body.style.background = settings.background;
+d3.selectAll("h1").style("color", settings.color);
+d3.selectAll("h2").style("color", settings.color);
+d3.selectAll("p").style("color", settings.color);
+d3.selectAll("line").style("stroke", settings.linecolor);
+
+var trackDesc = d3.select("body").append("div")
+  .attr("class", "trackdesc")
+  .text(function(){ return "Walk Description ...";})
+  .style("color", settings.color)
+  .style("left", settings.x2min + 60 + "px")
+  .style("opacity", 0);   
+
+var trackData = d3.select("body").append("div")
+  .attr("class", "trackdata")
+  .text(function(){ return "track data goes here"})
+  .style("color", settings.color)
+  .style("left", settings.x2min + 60 + "px")
+  .style("opacity", 0);
+
+
+var button_play = d3.select("body").append("input")
+  .attr("type", "image")
+  .attr("src", "playbutton.jpg")
+  .attr("class", "playbutton")
+  .attr("value", "Play")
+  .on("click", function() { playOnClick(); })
+  .style("left", settings.x2min + 60 + "px")
+  .style("opacity", 0);
+
+var button_sort_map = d3.select("body").append("div")
+  .attr("class", "sortbuttonmap")
+  .text(function(){ return "map";})
+  .style("color", settings.color)
+  .style("left", settings.x2min + 110 + "px")
+  .style("opacity", 0);
+
+var button_sort_slash = d3.select("body").append("div")
+  .attr("class", "sortbuttonslash")
+  .text(function(){ return "/";})
+  .style("color", settings.color)
+  .style("left", settings.x2min + 160 + "px")
+  .style("opacity", 0);
+
+var button_sort_volume = d3.select("body").append("div")
+  .attr("class", "sortbuttonvolume")
+  .text(function(){ return "sort";})
+  .style("left", settings.x2min + 170 + "px")
+  .style("color", settings.color);
+
+var button_sort = d3.select("body").append("input")
+  .attr("type", "image")
+  .attr("src", "buttonsort.png")
+  .attr("class", "sortbutton")
+  .attr("value", "Sort by Volume")
+  .on("click", function() { sortBySize(); })
+  .style("left", settings.x2min + 110 + "px")
+  .style("opacity", 0);
+
+
+
+//declare div for waveform
+var wf = d3.select("body").append("div")  
+    .attr("class", "waveform")     
+    .style("left", settings.xwf + "px")  
+    .style("opacity", 0);
+
+
+var wf_info1 = wf.append("span") 
+      .attr("class", "wf_info1")
+      .style("color", settings.color)
+      .text("wave form");
+var wf_info1a = wf.append("span") 
+      .attr("class", "wf_info1a")
+      .style("color", settings.color)
+      .text("wave form");
+var wf_info1b = wf.append("span") 
+      .attr("class", "wf_info1b")
+      .style("color", settings.color)
+      .text("wave form");
+
+var wf_info2 = wf.append("span") 
+      .attr("class", "wf_info2")
+      .style("color", settings.color)
+      .text("wave form");
+var wf_info2a = wf.append("span") 
+      .attr("class", "wf_info2a")
+      .style("color", settings.color)
+      .text("wave form");
+var wf_info2b = wf.append("span") 
+      .attr("class", "wf_info2b")
+      .style("color", settings.color)
+      .text("wave form");
+ 
+
+var wf_image = wf.append("img")
+      .attr("class", "wf_img")
+      .attr("width", 300)
+      .attr("height", 300)
+      .style("background", "transparent");
+
 
 
 var walkText = {};
@@ -322,35 +413,44 @@ walkData["track25"] = "1pm Thursday, July 31";
 walkData["track26"] = "5pm Thursday, July 31";
 
 
-var daynames = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+var color = d3.scale.ordinal()
+    .range(["#a6bddb", "#67a9cf", "#3690c0", "#02818a", "#016c59", "#014636"]);
+    
+    //.range(["#8996C2", "#7189AE", "#5C7B9A", "#486D86", "#375E72", "#28505E"]);
+    //.range(["#709F56", "#41875E", "#216D5F", " #1A5257", "#1F3845", "#1E202C"]);
+    //.range(["#A6A4D6", "#8788B2", "#6A6D8F", "#50536E", "#373A4E", "#202330"]);
+    //.range(["#7fcdbb", "#41b6c4", "#1d91c0", "#225ea8", "#253494", "#081d58"]);
+
 
 var margin = {top: 20, right: 10, bottom: 30, left: 10},
-    width = 1240 - margin.left - margin.right, 
-    height = 550 - margin.top - margin.bottom;//height = 600 - margin.top - margin.bottom;
+    width = settings.width - margin.left - margin.right, 
+    height = settings.height - margin.top - margin.bottom;//height = 600 - margin.top - margin.bottom;
 
-var width_menu = 400,
+var width_menu = settings.widthmenu,
     height_menu = height;
 
 // for menu layout
 var x = d3.scale.linear()
-    .range([40, width_menu - 60]);
+    .range([settings.xmin, settings.xmax]);
 
 var y = d3.scale.linear()
-    .range([100, 120]);
+    .range([settings.ymin, settings.ymax]);
 
 // for map layout
 var x2 = d3.scale.linear()
-  .range([width_menu+ 300, width + 200]);
+  .range([settings.x2min, settings.x2max]);
 
 var y2 = d3.scale.linear()
-    .range([180, 380]);
+    .range([80, 280]);
 
 
 var dx = function(i) { return 0; };
 var dy = function(i) { return 40*i -40; };
 
-var dx2 = function(d) { return x2(d) - 300; };
-var dy2 = function(d) { return y2(d) - 100; };
+// var dx2 = function(d) { return x2(d) - 300; };
+// var dy2 = function(d) { return y2(d) - 100; };
+var dx2 = function(d) { return x2(d); };
+var dy2 = function(d) { return y2(d); };
 
 var dx3 = function(d) { return d + 400; }; //d*4; } //d/10; }
 var dy3 = function(d) { return d + 80; };
@@ -411,14 +511,6 @@ function getOpacity(d){
   }
 }
 
-var color = d3.scale.ordinal()
-    .range(["#a6bddb", "#67a9cf", "#3690c0", "#02818a", "#016c59", "#014636"]);
-    
-    //.range(["#8996C2", "#7189AE", "#5C7B9A", "#486D86", "#375E72", "#28505E"]);
-    //.range(["#709F56", "#41875E", "#216D5F", " #1A5257", "#1F3845", "#1E202C"]);
-    //.range(["#A6A4D6", "#8788B2", "#6A6D8F", "#50536E", "#373A4E", "#202330"]);
-    //.range(["#7fcdbb", "#41b6c4", "#1d91c0", "#225ea8", "#253494", "#081d58"]);
-
 
 
 var svg = d3.select("body").append("svg")
@@ -430,7 +522,7 @@ var svg = d3.select("body").append("svg")
 var introText = d3.select("body").append("div")
   .attr("class", "intro")
   .text(function(){return "Select Walk"})
-  .style("fill", "grey")
+  .style("color", settings.color)
   .style("opacity", 1);
 
 // just for debugging
@@ -440,17 +532,13 @@ var trackInfo = d3.select("body").append("div")
   .style("opacity", 0);
 
 
-var trackDesc = d3.select("body").append("div")
-  .attr("class", "trackdesc")
-  .text(function(){ return "Walk Description ...";})
-  .style("opacity", 0)
-  ;
+// var trackDesc = d3.select("body").append("div")
+//   .attr("class", "trackdesc")
+//   .text(function(){ return "Walk Description ...";})
+//   .style("color", settings.color)
+//   .style("opacity", 0)
+//   ;
 
-
-var trackData = d3.select("body").append("div")
-  .attr("class", "trackdata")
-  .text(function(){ return "track data goes here"})
-  .style("opacity", 0);
 
 
 
@@ -535,11 +623,11 @@ function sortWavesForTracks(){
 }
 
 
-svg.append("rect")
-  .attr("width", width + margin.left + margin.right)
-  .attr("height", height + margin.top + margin.bottom)
-  .style("fill", "white");
-  //.style("fill", "#635c5c");
+// svg.append("rect")
+//   .attr("width", width + margin.left + margin.right)
+//   .attr("height", height + margin.top + margin.bottom)
+//   .style("fill", settings.background);
+//   //.style("fill", "#635c5c");
 
 
 var gradient = svg.append("svg:defs")
@@ -571,6 +659,7 @@ var bar_l = svg.append("text")
   .attr("y", 543)
   .attr("font-size", 10)
   .style("text-anchor", "right")
+  .style("fill", settings.color)
   .text("1pm");
 
 var bar_r = svg.append("text")
@@ -578,99 +667,10 @@ var bar_r = svg.append("text")
   .attr("y", 543)
   .attr("font-size", 10)
   .style("text-anchor", "left")
+  .style("fill", settings.color)
   .text("6pm");
 
 
-
-var button_sort_map = d3.select("body").append("div")
-  .attr("class", "sortbuttonmap")
-  .text(function(){ return "map";})
-  .style("opacity", 0);
-
-var button_sort_slash = d3.select("body").append("div")
-  .attr("class", "sortbuttonslash")
-  .text(function(){ return "/";})
-  .style("opacity", 0);
-
-var button_sort_volume = d3.select("body").append("div")
-  .attr("class", "sortbuttonvolume")
-  .text(function(){ return "sort";});
-
-var button_sort = d3.select("body").append("input")
-  .attr("type", "image")
-  .attr("src", "buttonsort.png")
-  .attr("class", "sortbutton")
-  .attr("value", "Sort by Volume")
-  .on("click", function() { sortBySize(); })
-  .style("opacity", 0);
-
-
-var button_play = d3.select("body").append("input")
-  .attr("type", "image")
-  // .attr("src", "buttonplay.png")
-  .attr("src", "playbutton.jpg")
-  .attr("class", "playbutton")
-  .attr("value", "Play")
-  .on("click", function() { playOnClick(); })
-  .style("opacity", 0);
-
-
-var detail = d3.select("body").append("div")
-    .attr("class", "detail");
-
-
-var detail_circ = svg.append("circle")
-  .attr("cx", function(){ return 100; })
-  .attr("cy", function(){ return 100; })
-  .attr("r", 2)
-  .style("fill", "red")
-  .style("opacity", 0);
-
-var detail_ln1 = svg.append("line")
-  .attr("x1", function(){ return 100; })
-  .attr("y1", function(){ return 100; })
-  .attr("x2", function(){ return 500; }) 
-  .attr("y2", function(){ return 500; })
-  .style("stroke-width", 4)
-  .style('stroke', "#c7c7c7")
-  .style("opacity", 0);
-
-
-
-//declare div for waveform
-var wf = d3.select("body").append("div")  
-    .attr("class", "waveform")       
-    .style("opacity", 0)
-    ;
-
-
-var wf_info1 = wf.append("span") 
-      .attr("class", "wf_info1")
-      .text("wave form");
-var wf_info1a = wf.append("span") 
-      .attr("class", "wf_info1a")
-      .text("wave form");
-
-var wf_info1b = wf.append("span") 
-      .attr("class", "wf_info1b")
-      .text("wave form");
-
-var wf_info2 = wf.append("span") 
-      .attr("class", "wf_info2")
-      .text("wave form");
-var wf_info2a = wf.append("span") 
-      .attr("class", "wf_info2a")
-      .text("wave form");
-
-var wf_info2b = wf.append("span") 
-      .attr("class", "wf_info2b")
-      .text("wave form");
- 
-
-var wf_image = wf.append("img")
-      .attr("class", "wf_img")
-      .attr("width", 300)
-      .attr("height", 300);
 
 
 
@@ -733,7 +733,8 @@ function sortBySize(){
       .attr("cx", function(d){ console.log(getx(d)); return getx(d); })
       .attr("cy", function(d){ console.log(gety(d)); return gety(d); })
       .style("opacity", function(d){ return getOpacity(d); })
-      .style("stroke", "white");     
+      //.style("stroke", "white")
+      ;     
 }
 
 
@@ -777,10 +778,10 @@ function drawDetails(d, cx, cy){
   var imgpath = "waveforms/" + d.walkid + "/" + d.id + ".png";
   console.log("imgpath: " + imgpath);
   wf_image.attr("src", imgpath);
+  wf_image.style("background", "transparent");
 
   wf.style("opacity", 1);
 
-  var h = 0;
   wf_info1.text("Location");
   wf_info1a.text("lat: " + " " + d.lat);
   wf_info1b.text("lon: " + d.lon);
@@ -792,13 +793,7 @@ function drawDetails(d, cx, cy){
 
 
 function hideDetails(){
-
   wf.style("opacity", 0);
-
-  detail_circ.style("opacity", 0);
-  detail_ln1.style("opacity", 0);
-
-  detail.style("opacity", 0);
 }
 
 //-------------------------------------------------------
@@ -821,8 +816,6 @@ d3.csv("maxMinDateInfo_2.csv", function(error, data){
       saveIdByTrack(d);
       saveWaveByTrack(d.walkid, d.wave);
       
-
-      console.log(d.hour);
       tempHours.push(d.hour);
 
       tempArr.push(d.walkid);  
@@ -897,7 +890,6 @@ d3.csv("maxMinDateInfo_2.csv", function(error, data){
 
       var dot = dots.append("circle")
         .filter(function(d){ return d.walkid === trackIDs[i] ; })
-        // .sort(function(d){ return function(a,b){ return  Number(points[b].min) - Number(points[a].min); } })
         .sort(function(d){ return function(a,b){ return  Number(points[b].avg) - Number(points[a].avg); } })
         .attr("class", "dot")
         .attr("r", function(d){ return avgV(d.avg); })//minV(d.min); }) //return d.min/1000; })
@@ -905,6 +897,7 @@ d3.csv("maxMinDateInfo_2.csv", function(error, data){
         .attr("cy", function(d) { d.dy = dy(i); return d.y = 200;}) //y(d.lon); })
         .style("fill", function(d) { return color(d.hour); })
         .style("stroke", "white")
+        .style("stroke-opacity", .4)
         .style("opacity", menuOpacity) //.2)
 
         .on("mouseover", function(d){ 
@@ -919,8 +912,10 @@ d3.csv("maxMinDateInfo_2.csv", function(error, data){
                 // get all dots in this walk
                 d3.selectAll(".dot")
                   .filter(function(d1){ return d1.walkid === d.walkid ; })
-                  .style("opacity", .8)
-                  .style("stroke-width", 1); 
+                  .attr("r", function(d1){ return avgVmenu(d1.avg) + 1})
+                  //.style("opacity", .8)
+                  //.style("stroke-width", 1)
+                  ; 
 
             } else{
 
@@ -948,13 +943,17 @@ d3.csv("maxMinDateInfo_2.csv", function(error, data){
                 d3.select(this)
                   .style("stroke", "white")
                   .style("stroke-width", 1)
-                  .style("opacity", .2);
+                  //.style("opacity", .2)
+                  .style("opacity", menuOpacity)
+                  ;
 
                 d3.selectAll(".dot")
                   .filter(function(d1){ return d1.walkid === d.walkid ; })
-                  .style("opacity", .2)
+                  .attr("r", function(d1){ return avgVmenu(d1.avg)})
+                  //.style("opacity", .2)
                   //.style("stroke", "white")
                   //.style("stroke-width", 1)
+                  .style("opacity", menuOpacity)
                   ;
                  
 
@@ -977,18 +976,14 @@ d3.csv("maxMinDateInfo_2.csv", function(error, data){
         .on("click", function(d){
 
           if(d.walkid != walkid){
-            //console.log("wave from trackwaves arr: " + trackwaves[d.walkid][0]);
-           
             lastwalk = walkid;
             walkid = d.walkid;
             swap();
 
           } else {
-            //console.log("currently on detail view");
             playOne(d);
           }
           
-
         });
 
       }
@@ -1006,8 +1001,6 @@ d3.csv("maxMinDateInfo_2.csv", function(error, data){
     function changeView(){
       clearTimeout(sortTimeout);
 
-      (this.checked) ? this.parentNode.childNodes[1].nodeValue = "Stretched View" : this.parentNode.childNodes[1].nodeValue = "Stacked View";
-
       var transition0 = svg.transition().duration(750);
       var transition1 = transition0.transition().duration(750);
 
@@ -1019,25 +1012,8 @@ d3.csv("maxMinDateInfo_2.csv", function(error, data){
             .attr("cx", function(d){ return x(d.lat) - d.dx; })
             .attr("cy", function(d){ return y(d.lon) + d.dy; })
             .attr("r", function(d){ return avgVmenu(d.avg); });
-            // .attr("r", function(d){ return minVmenu(d.min); });
-
-          
+            // .attr("r", function(d){ return minVmenu(d.min); });   
       }
-
-     
-
-
-
-      // (this.checked) ?
-      //     transition.selectAll(".dot")
-      //       .attr("cx", function(d){ return x(d.lat) - d.dx; })
-      //       .attr("cy", function(d){ return y(d.lon) + d.dy; })
-      //       .attr("r", function(d){ return minVmenu(d.min); })
-            
-      // :
-      //     transition.selectAll(".dot")
-      //       .attr("cx", function(d){ return x(d.lat); })
-      //       .attr("cy", function(d){ return y(d.lon); });
             
     }
 
@@ -1059,8 +1035,8 @@ d3.csv("maxMinDateInfo_2.csv", function(error, data){
         .attr("x2", function(d){ return dx2(d[2]); }) 
         .attr("y2", function(d){ return dy2(d[3]); })
         .style("opacity", .2)
-        .style("stroke-width", 4)
-        .style('stroke', "#c7c7c7");
+        .style("stroke-width", settings.linewidth)
+        .style("stroke", settings.linecolor);
 
   var streetnames = ["Valencia", "Mission", "16th", "22nd"];
 
@@ -1079,3 +1055,5 @@ d3.csv("maxMinDateInfo_2.csv", function(error, data){
 });
 
 </script>
+</body>
+</html>

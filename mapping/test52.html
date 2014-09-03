@@ -397,7 +397,7 @@ walkText["track17"] = "Pickup band, on 16th. Drums!";
 walkText["track18"] = "Walking home from Stamen, along Valencia";
 walkText["track20"] = "Walking to Stamen, along Valencia";
 walkText["track21"] = "Walking to Gray Area theater, along Mission Street.";
-walkText["track24"] = "Walking to Gray Area, along Valencia Street.";
+walkText["track24"] = "So many beeps! When leaving Stamen.";
 walkText["track25"] = "Walking to Stamen, along Valencia Street.";
 walkText["track26"] = "Walking to Great Area theater, along Valencia Street.";
 
@@ -969,8 +969,7 @@ d3.csv("maxMinDateInfo_2.csv", function(error, data){
 
       var dot = dots.append("circle")
         .filter(function(d){ return d.walkid === trackIDs[i] ; })
-        .sort(function(d){ return function(a,b){ 
-                          return Number(points[b].avg) - Number(points[a].avg); } })
+        .sort(function(d){ return function(a,b){return Number(points[b].avg) - Number(points[a].avg); } })
         .attr("class", "dot")
         .attr("r", function(d){ return minVmenu(d.min); }) //avgV(d.avg); })
         .attr("cx", function(d) {  d.dx = dx(d); return d.x = 400;}) 
@@ -1023,7 +1022,7 @@ d3.csv("maxMinDateInfo_2.csv", function(error, data){
 
                 d3.selectAll(".dot")
                   .filter(function(d1){ return d1.walkid === d.walkid ; })
-                  .attr("r", function(d1){ return avgVmenu(d1.avg)})
+                  .attr("r", function(d1){ return minVmenu(d1.min)})
                   .style("opacity", menuOpacity)
                   ;
                  
@@ -1078,7 +1077,7 @@ d3.csv("maxMinDateInfo_2.csv", function(error, data){
           transition0.selectAll(".dot")
             .attr("cx", function(d){ return x(d.lat) - d.dx; })
             .attr("cy", function(d){ return y(d.lon) + d.dy; })
-            .attr("r", function(d){ return avgVmenu(d.avg); });
+            .attr("r", function(d){ return minVmenu(d.min); });
       }
             
     }

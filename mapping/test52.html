@@ -32,7 +32,8 @@ p {
   text-align: center;
   font-size: 18px;
   width: 230px;
-  left: 64px;
+  /*left: 64px;*/
+  left: -20px;
   top: 140px;
 }
 
@@ -53,7 +54,7 @@ p {
 
 div.waveform {
   position: absolute;
-  top: 490px;
+  top: 390px;
   /*left: 850px;*/
   height: 300px;
   padding: 10px;
@@ -179,10 +180,10 @@ div.buttons {
   opacity: 0;
 }
 
-.line {
-  fill: none;
+/*.line {
+  fill: "grey";
   stroke-width: 1.5px;
-}
+}*/
 </style>
 
 <body>
@@ -226,7 +227,8 @@ function LinkedList() {
 
 
 var online = {
-  "background": "#FFFFFF",
+  //"background": "#FFFFFF",
+  "background": "#333333",
   "color": "#686868",
   "linecolor": "c7c7c7",
   "linewidth": "4px",
@@ -234,14 +236,13 @@ var online = {
   "height": "550",
   "xmin": 40, 
   "xmax" : 800,
-  "ymin": 100,
-  "ymax": 140,
+  "ymin": 80,
+  "ymax": 120,
   "x2min": 40,
   "x2max": 800,
   "y2min": 80,
-  "y2max": 280,
-  "xwf": 970
-  
+  "y2max": 220,
+  "xwf": 970 
 };
 
 var onwall = {
@@ -257,8 +258,7 @@ var onwall = {
   "ymax": 120,
   "x2min": 300,
   "x2max": 900,
-  "xwf": 700 
-  
+  "xwf": 700   
 }
 
 var settings = online;  // change to onwallV, if in installation
@@ -286,6 +286,7 @@ d3.selectAll("h1").style("color", settings.color);
 d3.selectAll("h2").style("color", settings.color);
 d3.selectAll("p").style("color", settings.color);
 d3.selectAll("line").style("stroke", settings.linecolor);
+
 
 var trackDesc = d3.select("body").append("div")
   .attr("class", "trackdesc")
@@ -343,6 +344,9 @@ var button_sort = d3.select("body").append("input")
   .style("opacity", 0);
 
 
+
+
+
 //declare div for waveform & details
 var wf = d3.select("body").append("div")  
     .attr("class", "waveform")     
@@ -386,10 +390,10 @@ var wf_image = wf.append("img")
 var walkText = {};
 walkText["track8"] = "Walking from Stamen to Gray Area, along Mission Street.";
 walkText["track11"] = "Walking to Stamen, along Valencia Street.";
-walkText["track12"] = "Walking home from Stamen, along Valencia Street.";
+walkText["track12"] = "Sirens! Walking from Stamen.";
 walkText["track13"] = "Walking to Stamen, along Valencia Street.";
 walkText["track15"] = "Walking to Gray Area, along Valencia Street.";
-walkText["track17"] = "Walking to Stamen, along Valencia";
+walkText["track17"] = "Pickup band, on 16th. Drums!";
 walkText["track18"] = "Walking home from Stamen, along Valencia";
 walkText["track20"] = "Walking to Stamen, along Valencia";
 walkText["track21"] = "Walking to Gray Area theater, along Mission Street.";
@@ -411,8 +415,24 @@ walkData["track24"] = "4pm Wednesday, July 30";
 walkData["track25"] = "1pm Thursday, July 31";
 walkData["track26"] = "5pm Thursday, July 31";
 
+// Map lines and street names
+var sVa = [37.765230, -122.421938, 37.755009, -122.420956];
+var sMi = [37.765230, -122.419733, 37.755009, -122.418730];
+var s16 = [37.765045, -122.419125, 37.764774, -122.422429];
+var s22 = [37.755444, -122.418138, 37.755206, -122.421442];
+
+var streets = [sVa, sMi, s16, s22];
+
+var streetnames = ["Valencia", "Mission", "16th", "22nd"];
+
+
+
+//var color = d3.scale.category20b();
 
 var color = d3.scale.ordinal()
+            //.range(["#393b79", "#5254a3", "#6b6ecf", "#9c9ede", "#637939", "#8ca252", "#b5cf6b"]);
+      //.range(["#5254a3", "#6b6ecf", "#6b6ecf", "#8ca252", "#cedb9c", "#a55194", "#ce6dbd"]);
+    
     .range(["#a6bddb", "#67a9cf", "#3690c0", "#02818a", "#016c59", "#014636"]);
     
     //.range(["#8996C2", "#7189AE", "#5C7B9A", "#486D86", "#375E72", "#28505E"]);
@@ -451,8 +471,9 @@ function TrackTime(trackid_, hour_){
 // array of TrackTime objects
 var tracktimes = [];
 
-function getIndex(_tt){
-  var tid = _tt.walkid;
+function getIndex(tid){
+// function getIndex(_tt){
+  //var tid = _tt.walkid;
   var ind = -1;
   for(var i=0; i<tracktimes.length; i++){
     //console.log(tracktimes[i], tracktimes[i].walkid);
@@ -464,31 +485,27 @@ function getIndex(_tt){
   return ind;
 }
 
-// find track object for this walk
+function getWalkID(ind){
+  return tracktimes[ind].walkid;
+}
+
+// add track object for this walk, ordered by time
 function indexOfTrack(_tt){
-  var tid = _tt.walkid;
   var hr = _tt.hour;
-  var ind = getIndex(_tt);
+  var ind = getIndex(_tt.walkid);
 
   if(ind < 0){
-    console.log("adding to tracktimes " + _tt);
-
     if(tracktimes.length<1){ 
         tracktimes.push(_tt); 
     } else {
       for(var i=0; i<tracktimes.length; i++){
-        console.log("i.hour: " + tracktimes[i].hour);
         if(tracktimes[i].hour > hr || tracktimes[i].hour === hr){
-          console.log("last: " + tracktimes[i].hour + ", " + hr);
           tracktimes.splice(i, 0, _tt);
           break;
         }        
       }
-
-    //console.log(tracktimes);
     }
   }
-
 }
 
 
@@ -499,8 +516,9 @@ function saveTrackTime(d){
 }
 
 
-var dx = function(d) { return 5 * getIndex(d) ; };
-var dy = function(d) { return (30 * getIndex(d)) -40};
+// var dx = function(d) { return (8 * getIndex(d.walkid)) }; // - 50; };
+var dx = function(d) { return (getIndex(d.walkid)) }; // - 50; };
+var dy = function(d) { return (22 * getIndex(d.walkid)) +20};
                               
 
 var dx2 = function(d) { return x2(d); };
@@ -512,7 +530,7 @@ var dx3 = function(d) { return d + 400; }; //d*4; } //d/10; }
 var dy3 = function(d) { return d + 80; };
 
 var minVmenu = d3.scale.linear()
-  .range([2,10]);
+  .range([1,10]);
 
 var minV = d3.scale.linear()
   .range([1, 30]);
@@ -530,7 +548,7 @@ var maxV = d3.scale.linear()
 function getx(d){
   if(d.walkid === walkid){
     if(sortedby === "map"){
-      return dx2(d.lat);
+      return dx2(d.lat) + 50;
     } else {
       return dx3(d.gridx) + avgV(d.avg)/2;//minV(d.min)/2;
     }
@@ -540,14 +558,20 @@ function getx(d){
 }
 
 function gety(d){
+
   if(d.walkid === walkid){
     if(sortedby === "map"){
-      return dy2(d.lon);
+      return dy2(d.lon) + d.dy;
     } else {
       return dy3(d.gridy);
     }
   } else {
-    return y(d.lon) + d.dy;
+    if(getIndex(d.walkid) < getIndex(walkid)){
+      return y(d.lon) + d.dy - 30;
+    } else {
+      return y(d.lon) + d.dy + 110;
+    }
+    //return y(d.lon) + d.dy;
   }
 }
 
@@ -555,7 +579,7 @@ function getr(d){
   if(d.walkid === walkid){
     return avgV(d.avg); //minV(d.min);
   } else {
-    return avgVmenu(d.avg); //minVmenu(d.min);
+    return minVmenu(d.min); //avgVmenu(d.avg); //minVmenu(d.min);
   }
 }
 
@@ -642,9 +666,6 @@ function saveIdByTrack(d){
   if(! idsByTrack[d.walkid]){ idsByTrack[d.walkid] = []; }
   idsByTrack[d.walkid].push(d.id);
 }
-
-
-
 
 
 function savePoint(d){
@@ -779,6 +800,8 @@ function sortBySize(){
 // walkid = trackIDs[0]; 
 // var interval = setInterval(swap(), 3000*10);
 
+var map;
+
 function swap(){
 
   playstate = "pause";
@@ -797,15 +820,32 @@ function swap(){
   trackData.text(walkData[walkid]).style("opacity", 1);
 
   button_play.style("opacity", .8);
+
+  
  
   d3.transition().duration(750)
     .selectAll(".dot")
-      .filter(function(d){ return d.walkid === walkid || d.walkid === lastwalk;})
+      //.attr("cy", function(d){ return gety(d) + 100; })
+      //.filter(function(d){ return d.walkid === walkid || d.walkid === lastwalk;})
       .attr("cx", function(d){ return getx(d); })
       .attr("cy", function(d){ return gety(d); })
       .attr("r", function(d){ return getr(d); })
       .style("opacity", function(d){ return getOpacity(d); })
-      .style("stroke", "white");    
+      .style("stroke", "white");
+    // .transition().selectAll(".line")
+    //   .data(streets)
+    //   .enter()
+    //   .attr("x2", function(d){return 700;})
+    //   .style("stroke", "black");
+
+      
+        
+        // .attr("x1", function(d){ return 200; })//dx2(d[0]) + 100; })
+        // .attr("y1", function(d){ return 400; })//dy2(d[1]) + 100; })
+        // .attr("x2", function(d){ return 300; })//dx2(d[2]) + 100; }) 
+        // .attr("y2", function(d){ return 400; });//dy2(d[3]) + 100; });   
+
+
 }
 
 
@@ -830,6 +870,8 @@ function drawDetails(d, cx, cy){
 function hideDetails(){
   wf.style("opacity", 0);
 }
+
+
 
 //-------------------------------------------------------
 d3.csv("maxMinDateInfo_2.csv", function(error, data){
@@ -888,7 +930,6 @@ d3.csv("maxMinDateInfo_2.csv", function(error, data){
       .enter();
 
 
-
       trackIDs.sort(function(a,b){
         // ToDo: may need to change this, if folder names change
         return Number(a.substring(5, a.length)) - Number(b.substring(5, b.length));
@@ -928,31 +969,27 @@ d3.csv("maxMinDateInfo_2.csv", function(error, data){
 
       var dot = dots.append("circle")
         .filter(function(d){ return d.walkid === trackIDs[i] ; })
-        .sort(function(d){ return function(a,b){ return  Number(points[b].avg) - Number(points[a].avg); } })
+        .sort(function(d){ return function(a,b){ 
+                          return Number(points[b].avg) - Number(points[a].avg); } })
         .attr("class", "dot")
-        .attr("r", function(d){ return avgV(d.avg); })//minV(d.min); }) //return d.min/1000; })
-        .attr("cx", function(d) {  d.dx = dx(d); return d.x = 200;}) //x(d.lat); })
-        .attr("cy", function(d) { d.dy = dy(d); return d.y = 200;}) //y(d.lon); })
+        .attr("r", function(d){ return minVmenu(d.min); }) //avgV(d.avg); })
+        .attr("cx", function(d) {  d.dx = dx(d); return d.x = 400;}) 
+        .attr("cy", function(d) { d.dy = dy(d); return d.y = 200;}) 
         .style("fill", function(d) { return color(d.hour); })
+        //.style("fill", function(d) { return color(j); })
         .style("stroke", "white")
         .style("stroke-opacity", .4)
-        .style("opacity", menuOpacity) //.2)
+        .style("opacity", menuOpacity) 
 
         .on("mouseover", function(d){ 
           if(d3.select(this)[0][0]["style"]["opacity"] > 0.0){
 
             if(d.walkid != walkid){
                 
-                // trackInfo.text(d.walkid)
-                //   .style("top", d3.select(this).attr("cy") + "px")
-                //   .style("opacity", 1);
-
                 // get all dots in this walk
                 d3.selectAll(".dot")
                   .filter(function(d1){ return d1.walkid === d.walkid ; })
-                  .attr("r", function(d1){ return avgVmenu(d1.avg) + 1})
-                  //.style("opacity", .8)
-                  //.style("stroke-width", 1)
+                  .attr("r", function(d1){ return minVmenu(d1.avg) + 1})
                   ; 
 
             } else{
@@ -981,16 +1018,12 @@ d3.csv("maxMinDateInfo_2.csv", function(error, data){
                 d3.select(this)
                   .style("stroke", "white")
                   .style("stroke-width", 1)
-                  //.style("opacity", .2)
                   .style("opacity", menuOpacity)
                   ;
 
                 d3.selectAll(".dot")
                   .filter(function(d1){ return d1.walkid === d.walkid ; })
                   .attr("r", function(d1){ return avgVmenu(d1.avg)})
-                  //.style("opacity", .2)
-                  //.style("stroke", "white")
-                  //.style("stroke-width", 1)
                   .style("opacity", menuOpacity)
                   ;
                  
@@ -1025,8 +1058,6 @@ d3.csv("maxMinDateInfo_2.csv", function(error, data){
         });
 
       }
-
-
     
     d3.select("input").on("change", changeView);
 
@@ -1044,27 +1075,16 @@ d3.csv("maxMinDateInfo_2.csv", function(error, data){
 
       if(this.checked){
 
-          // console.log(walkid);
-          // swap();
           transition0.selectAll(".dot")
             .attr("cx", function(d){ return x(d.lat) - d.dx; })
             .attr("cy", function(d){ return y(d.lon) + d.dy; })
             .attr("r", function(d){ return avgVmenu(d.avg); });
-            // .attr("r", function(d){ return minVmenu(d.min); });   
       }
             
     }
 
 
-  // Map lines and street names
-  var sVa = [37.765230, -122.421938, 37.755009, -122.420956];
-  var sMi = [37.765230, -122.419733, 37.755009, -122.418730];
-  var s16 = [37.765045, -122.419125, 37.764774, -122.422429];
-  var s22 = [37.755444, -122.418138, 37.755206, -122.421442];
-
-  var streets = [sVa, sMi, s16, s22];
-
-  svg.selectAll(".line")
+  map = svg.selectAll(".line")
         .data(streets)
         .enter()
         .append("line")
@@ -1075,8 +1095,6 @@ d3.csv("maxMinDateInfo_2.csv", function(error, data){
         .style("opacity", .2)
         .style("stroke-width", settings.linewidth)
         .style("stroke", settings.linecolor);
-
-  var streetnames = ["Valencia", "Mission", "16th", "22nd"];
 
   svg.selectAll(".text")
           .data(streetnames)
@@ -1091,6 +1109,8 @@ d3.csv("maxMinDateInfo_2.csv", function(error, data){
 
 
 });
+
+
 
 </script>
 </body>

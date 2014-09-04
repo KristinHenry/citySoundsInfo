@@ -865,6 +865,10 @@ function swap(){
 
 function drawDetails(d, cx, cy){
 
+  mapdot.attr("cx", mapx(d.lat))
+                      .attr("cy", mapy(d.lon))
+                      .style("opacity", 1); 
+
   var imgpath = "waveforms/" + d.walkid + "/" + d.id + ".png";
   wf_image.attr("src", imgpath);
   wf_image.style("background", "transparent");
@@ -883,6 +887,7 @@ function drawDetails(d, cx, cy){
 
 function hideDetails(){
   wf.style("opacity", 0);
+  mapdot.style("opacity", 0);
 }
 
 
@@ -1057,6 +1062,7 @@ d3.csv("maxMinDateInfo_2.csv", function(error, data){
                   .style("fill", function(d) { return color(d.hour); })
                   ;
 
+                mapdot.style("opacity", 0);
                 hideDetails();
             }   
 

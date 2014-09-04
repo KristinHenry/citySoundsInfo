@@ -147,35 +147,35 @@ div.buttons {
 
 .playbutton {
   position: absolute;
-  top: 280px;
+  top: 220px;
   width: 35px;
   opacity: .4;
 }
 
 .sortbutton {
   position: absolute;
-  top: 280px;
+  top: 220px;
   width: 140px;
   opacity: 0;
 }
 
 .sortbuttonmap {
   position: absolute;
-  top: 288px;
+  top: 228px;
   width: 140px;
   opacity: 0;
 }
 
 .sortbuttonslash {
   position: absolute;
-  top: 288px;
+  top: 228px;
   width: 140px;
   opacity: 0;
 }
 
 .sortbuttonvolume {
   position: absolute;
-  top: 288px;
+  top: 228px;
   width: 140px;
   opacity: 0;
 }
@@ -231,7 +231,7 @@ var online = {
   "background": "#333333",
   "color": "#686868",
   "linecolor": "c7c7c7",
-  "linewidth": "4px",
+  "linewidth": "2px",
   "width": "1240",
   "height": "550",
   "xmin": 40, 
@@ -242,7 +242,9 @@ var online = {
   "x2max": 800,
   "y2min": 80,
   "y2max": 220,
-  "xwf": 970 
+  "xwf": 970, 
+  "mapxy": [800,  120, 1200, 220]
+
 };
 
 var onwall = {
@@ -462,6 +464,11 @@ var x2 = d3.scale.linear()
 var y2 = d3.scale.linear()
     .range([settings.y2min, settings.y2max]);
 
+var mapx = d3.scale.linear()
+    .range([settings.mapxy[0], settings.mapxy[2]]);
+var mapy = d3.scale.linear()
+    .range([settings.mapxy[1], settings.mapxy[3]]);
+
 
 // for keeping track of what hours each walk happened
 function TrackTime(trackid_, hour_){
@@ -598,6 +605,13 @@ var svg = d3.select("body").append("svg")
     .attr("height", height + margin.top + margin.bottom)
     .style("margin-left", "auto")
     .style("margin-right", "auto");
+
+var mapdot = svg.append("circle")
+      .attr("r", 2)
+      .attr("cx", "800px")
+      .attr("cy", "400px")
+      .style("fill", "red")
+      .style("opacity", 0);
 
 var introText = d3.select("body").append("div")
   .attr("class", "intro")
@@ -912,6 +926,9 @@ d3.csv("maxMinDateInfo_2.csv", function(error, data){
     x2.domain(d3.extent(data, function(d) { return d.lat; })).nice();
     y2.domain(d3.extent(data, function(d) { return d.lon; })).nice();
 
+    mapx.domain(d3.extent(data, function(d) { return d.lat; })).nice();
+    mapy.domain(d3.extent(data, function(d) { return d.lon; })).nice();
+
 
     minVmenu.domain(d3.extent(data, function(d){ return d.min;})).nice();
     minV.domain(d3.extent(data, function(d){ return d.min;})).nice();
@@ -995,7 +1012,11 @@ d3.csv("maxMinDateInfo_2.csv", function(error, data){
 
                 trackInfo.style("opacity", 0);
 
-                drawDetails(d, d3.select(this).attr("cx"), d3.select(this).attr("cy"));              
+                drawDetails(d, d3.select(this).attr("cx"), d3.select(this).attr("cy"));  
+
+                mapdot.attr("cx", mapx(d.lat))
+                      .attr("cy", mapy(d.lon))
+                      .style("opacity", 1);            
 
                 d3.select(this)
                   .style("fill", "red")
@@ -1087,10 +1108,10 @@ d3.csv("maxMinDateInfo_2.csv", function(error, data){
         .data(streets)
         .enter()
         .append("line")
-        .attr("x1", function(d){ return dx2(d[0]); })
-        .attr("y1", function(d){ return dy2(d[1]); })
-        .attr("x2", function(d){ return dx2(d[2]); }) 
-        .attr("y2", function(d){ return dy2(d[3]); })
+        .attr("x1", function(d){ return mapx(d[0]); })
+        .attr("y1", function(d){ return mapy(d[1]); })
+        .attr("x2", function(d){ return mapx(d[2]); }) 
+        .attr("y2", function(d){ return mapy(d[3]); })
         .style("opacity", .2)
         .style("stroke-width", settings.linewidth)
         .style("stroke", settings.linecolor);
@@ -1099,8 +1120,8 @@ d3.csv("maxMinDateInfo_2.csv", function(error, data){
           .data(streetnames)
           .enter()
           .append("text")
-          .attr("x", function(d,i){ return dx2(streets[i][0]) + 10; })
-          .attr("y", function(d,i){ return dy2(streets[i][1]) + 4;})
+          .attr("x", function(d,i){ return mapx(streets[i][0]) + 10; })
+          .attr("y", function(d,i){ return mapy(streets[i][1]) + 4;})
           .attr("fill", "gray")
           .style("font-size", 10)
           .text(function(d) { return d; });

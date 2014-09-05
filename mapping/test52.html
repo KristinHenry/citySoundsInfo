@@ -3,7 +3,7 @@
 
 <style>
 body {
-  background-color: #635c5c;
+  /*background-color: #635c5c;*/
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
   text-align: left;
 }
@@ -54,7 +54,7 @@ p {
 
 div.waveform {
   position: absolute;
-  top: 390px;
+  top: 440px;
   /*left: 850px;*/
   height: 300px;
   padding: 10px;
@@ -180,10 +180,6 @@ div.buttons {
   opacity: 0;
 }
 
-/*.line {
-  fill: "grey";
-  stroke-width: 1.5px;
-}*/
 </style>
 
 <body>
@@ -229,7 +225,7 @@ function LinkedList() {
 var online = {
   //"background": "#FFFFFF",
   "background": "#333333",
-  "color": "#686868",
+  "color": "#999999",
   "linecolor": "c7c7c7",
   "linewidth": "2px",
   "width": "1240",
@@ -243,7 +239,7 @@ var online = {
   "y2min": 80,
   "y2max": 220,
   "xwf": 970, 
-  "mapxy": [800,  120, 1200, 220]
+  "mapxy": [800,  170, 1200, 270]
 
 };
 
@@ -309,7 +305,8 @@ var trackData = d3.select("body").append("div")
 
 var button_play = d3.select("body").append("input")
   .attr("type", "image")
-  .attr("src", "playbutton.jpg")
+  // .attr("src", "playbutton.jpg")
+  .attr("src", "playbutton_light.png")
   .attr("class", "playbutton")
   .attr("value", "Play")
   .on("click", function() { playOnClick(); })
@@ -533,7 +530,8 @@ var dy2 = function(d) { return y2(d); };
 // var dx2 = function(d) { return 5 * getIndex(d) ; };
 // var dy2 = function(d) { return (30 * getIndex(d)) -40};
 
-var dx3 = function(d) { return d + 400; }; //d*4; } //d/10; }
+//var dx3 = function(d) { return d + 400; }; //d*4; } //d/10; }
+var dx3 = function(d) { return d + 40; }; //400; };
 var dy3 = function(d) { return d + 80; };
 
 var minVmenu = d3.scale.linear()
@@ -555,7 +553,7 @@ var maxV = d3.scale.linear()
 function getx(d){
   if(d.walkid === walkid){
     if(sortedby === "map"){
-      return dx2(d.lat) + 50;
+      return dx2(d.lat) + 10; //50;
     } else {
       return dx3(d.gridx) + avgV(d.avg)/2;//minV(d.min)/2;
     }
@@ -708,51 +706,51 @@ function sortWavesForTracks(){
 }
 
 
-var gradient = svg.append("svg:defs")
-  .append("svg:linearGradient")
-  .attr("id", "gradient")
-  .attr("spreadMethod", "pad");
+// var gradient = svg.append("svg:defs")
+//   .append("svg:linearGradient")
+//   .attr("id", "gradient")
+//   .attr("spreadMethod", "pad");
 
-var colors = color.range(); 
-var gap = 100/(colors.length);
-for(var i=0; i<colors.length; i++){
-  gradient.append("svg:stop")
-    .attr("offset", i * gap + "%")
-    .attr("stop-color", colors[i])
-    //.attr("spreadMethod", "pad")
-    .attr("stop-opacity", 1);
-}
+// var colors = color.range(); 
+// var gap = 100/(colors.length);
+// for(var i=0; i<colors.length; i++){
+//   gradient.append("svg:stop")
+//     .attr("offset", i * gap + "%")
+//     .attr("stop-color", colors[i])
+//     //.attr("spreadMethod", "pad")
+//     .attr("stop-opacity", 1);
+// }
  
-// for gradient
-var bar = svg.append("rect")
-  .attr("x", 64)
-  .attr("y", 530)
-  .attr("width", 230)
-  .attr("height", 18)
-  .style("fill", "url(#gradient)")
-  .style("opacity", .8);
+// // for gradient
+// var bar = svg.append("rect")
+//   .attr("x", 64)
+//   .attr("y", 530)
+//   .attr("width", 230)
+//   .attr("height", 18)
+//   .style("fill", "url(#gradient)")
+//   .style("opacity", .8);
 
-var bar_l = svg.append("text")
-  .attr("x", 40)
-  .attr("y", 543)
-  .attr("font-size", 10)
-  .style("text-anchor", "right")
-  .style("fill", settings.color)
-  .text("1pm");
+// var bar_l = svg.append("text")
+//   .attr("x", 40)
+//   .attr("y", 543)
+//   .attr("font-size", 10)
+//   .style("text-anchor", "right")
+//   .style("fill", settings.color)
+//   .text("1pm");
 
-var bar_r = svg.append("text")
-  .attr("x", 300)
-  .attr("y", 543)
-  .attr("font-size", 10)
-  .style("text-anchor", "left")
-  .style("fill", settings.color)
-  .text("6pm");
+// var bar_r = svg.append("text")
+//   .attr("x", 300)
+//   .attr("y", 543)
+//   .attr("font-size", 10)
+//   .style("text-anchor", "left")
+//   .style("fill", settings.color)
+//   .text("6pm");
 
 
 
 function gridPositions(track){
   // get relative positions in grid using linked list for this track
-  var maxX = 760;
+  var maxX = settings.xmax-100; //500; //760;
   var list = lists[track];
 
   var node = list.start;
@@ -814,7 +812,7 @@ function sortBySize(){
 // walkid = trackIDs[0]; 
 // var interval = setInterval(swap(), 3000*10);
 
-var map;
+//var map;
 
 function swap(){
 
@@ -1122,7 +1120,7 @@ d3.csv("maxMinDateInfo_2.csv", function(error, data){
         .style("stroke-width", settings.linewidth)
         .style("stroke", settings.linecolor);
 
-  svg.selectAll(".text")
+ mapstreet = svg.selectAll(".text")
           .data(streetnames)
           .enter()
           .append("text")

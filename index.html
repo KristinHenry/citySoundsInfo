@@ -1,240 +1,645 @@
 <!DOCTYPE html>
 <html lang="en">
+
   <head>
+
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>citySounds</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
+    <title>ArtAtomic: Art, Code and Science of Kristin Henry</title>
 
-    <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-  <style>
-    p.dot {
-      color: white;
-    }
-
-  </style>
-
+    <!-- Custom styles for this template -->
+    <link href="css/4-col-portfolio.css" rel="stylesheet">
+    <script src="http://d3js.org/d3.v4.min.js"></script>
   </head>
+
   <body>
-    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div class="container">
-
-        <a class="navbar-brand" href="#">myCitySounds</a>      
-
-        <ul class="nav navbar-nav navbar-right">
-            <li><a href="#w1">1</a></li>
-            <li><a href="#w2">2</a></li>
-            <li><a href="#w3">3</a></li>
-            <li><a href="#w4">4</a></li>
-            <li><a href="#w5">5</a></li>
-            <li><a href="#w6">6</a></li>
-            <li><a href="#w7">7</a></li>
-
-            <!-- <li><a href="#w8">8</a></li> -->
-            <li></li>
-            <li><a href="#w9">About</a></li>
-
-        </ul>
+        <a class="navbar-brand" href="index.html">ArtAtomic: Art + Code + Science</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="index.html">Home
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="about.html">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://kristinhenry.dunked.com/contact">Contact</a>
+            </li>
+          </ul>
+        </div>
       </div>
     </nav>
 
-
-    <div class="jumbotron">
-      <div class="container">
-        <h1>myCitySounds</h1>
-        <p>An interactive visualization and soundmap of audio samples recorded in the dynamic and ever-changing Mission district of San Francisco. Each recording session occurred while walking between the Stamen Design studio and the Gray Area theater.</p>
-        <p><a href="mapping/test52.html">See project live</a></p>
-      </div>
-    </div>
-
+    <!-- Page Content -->
     <div class="container">
-     <!--  <div class="row text-center">
-          <img src="imgs/walking_cropped_2.jpg" alt="Soundmap" height="240" width="740">
-      </div> -->
 
-      <div class="row"><p class="dot"><a id="w1"></a>.</p></div>
+      <!-- Page Heading -->
+      <h1 class="my-4">Kristin Henry
+
+        <small><br>Art, Code, Science</small>
+      </h1>
+
       <div class="row">
-        <div class="col-md-2">
-          <h2>1</h2>
+        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <a href="inkyDays_2018_05.html"><img class="card-img-top" src="imgs/inkyDays121017.jpg" alt=""></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="inkyDays_2018_05.html">InkyDays</a>
+              </h4>
+              <p class="card-text">Daily sketches, drawn in ink.</p>
+            </div>
+          </div>
         </div>
-        <div class="col-md-8">
-          <h2>Project Origins</h2>
-          <p>My first exploration of sound mapping was back in 2012, as part of a research project.  I was interested in how much noise pollution I experienced in my day to day life, and developed an Android app to continuously take one second recordings every minute for several weeks. My data visualizations were simple summaries of my research results. This heat map shows the noisiest times in my days, with darker squares showing the noisier hours.</p>
-          <a href="http://kristinhenry.dunked.com/mysoundscape-analysis-and-visualization-of-audio-samples"><img src="imgs/Week1_avg.png" alt="Noise Heatmap" height="300" width="746"></a> 
-          <p>While searching for similar projects, I discovered Stamen Design and their <a href="http://tendernoise.movity.com/">TenderNoise</a> project.  I’ve been a fan of their work ever since.</P>
-          <p>When I found out about the Gray Area Creative Code Fellowship, and that Stamen was on the list of mentoring organizations, I had to apply.  It was a long shot, since a lot of people would be applying.  I proposed an ambitious project: expanding on my earlier research, adding geolocation, and developing new visualizations.  To my surprise and delight, Stamen selected my proposal.</p>
-        </div> 
-      </div>
-
-      <div class="row"><p class="dot"><a id="w2"></a>.</p></div>
-      <div class="row">
-        <div class="col-md-2">
-          <h2>2</h2>
+        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <a href="https://github.com/KristinHenry/d3unconf2017"><img class="card-img-top" src="imgs/d3unconf2017.jpg" alt=""></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="https://github.com/KristinHenry/d3unconf2017">Generative Art Seed, in D3</a>
+              </h4>
+              <p class="card-text">Generative art seed in d3.js, for workshop at d3Unconf 2017.<br>
+                <a href="https://github.com/KristinHenry/d3unconf2017">code</a></p>
+            </div>
+          </div>
         </div>
-        <div class="col-md-8">
-          <h2>Finding Story  &amp; Defining Scope</h2>
-          <p>From the beginning, this project was about collecting new data and finding the story.  Going out and observing an urban environment in a new way, and visually expressing these observations.</p>
-          <p>The scope of my proposed project was way too big to accomplish in ten short weeks. How much data could I actually collect? Trying to get recordings from all over SF would lead to sparse data problems. Gaps in a map would stand out.</p>
-          <p><img src="imgs/mapabstract.jpg" alt="Pins on a Map" height="200" width="275">
-          <img src="imgs/walk_dots_sketch.jpg" alt="Walks" height="120" width="300"></p>
-          <p>Some early sketches made this obvious. I started playing with the idea of visualizing sound as I went on walks around the city, which had some promise. But a narrower focus was needed. Instead of trying to tell a story about the whole city, this would be a smaller story.</p>
-          <p>It seemed natural to focus on the area between Stamen and Gray Area, which are both on Mission street. I would be walking back and forth between the two locations throughout the fellowship, sometimes on Valencia and sometimes on Mission. This constrained the sampling area to Mission and Valencia streets, between 16th and 22nd streets.  It also focussed the project on the Mission district, a neighborhood in San Francisco currently going through a great deal of change.   My walking recording sessions would capture an audio ‘snapshot’ of the neighborhood as it is today.</p>
-          
-
-        </div> 
-      </div>
-
-      <div class="row"><p class="dot"><a id="w3"></a>.</p></div>
-      <div class="row">
-        <div class="col-md-2">
-          <h2>3</h2>
+        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <a href="https://github.com/KristinHenry/workshopOct2017"><img class="card-img-top" src="imgs/treeMap.jpg" alt=""></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="https://github.com/KristinHenry/workshopOct2017">Data Cleaning Workshop</a>
+              </h4>
+              <p class="card-text">Workshop materials for data cleaning (and some data viz), for workshop at Demystifying AI Oct 2017.<br>
+                <a href="https://github.com/KristinHenry/workshopOct2017">code</a> | <a href="https://docs.google.com/presentation/d/1oOV7lVE5ZCniZVHHdFm0tRCzY4E7Ls_XLL88G5RS0jg/edit?usp=sharing">slides</a></p>
+            </div>
+          </div>
         </div>
-        <div class="col-md-8">
-          <h2>Data Collection &amp; Analysis</h2>
-          <p>Since there wasn’t enough time to add geolocation features to the app I’d developed for my previous research, I looked for an app that came closest to what I needed.  The OSM tracker had the essential features: audio recording with timestamp and geolocation.</p>
-          <p>It also displayed estimated gps accuracy. This came in handy, as I learned about gps and how signals bounce against buildings making positioning less accurate.  In my walks, I tried to stay as far from buildings as I could. This helped with better accuracy, which ranged from 3-10 meters, but usually around 4 meters.</p>
-          <p>In my previous research, audio was sampled once per minute. As I started collecting data while walking, it became clear that this wasn’t nearly frequent enough. After trying several intervals, five seconds worked out best. Sampling, instead of continual recordings, was done for a statistical approach and also to avoid recording entire conversations.</p>
-          <p>Between the Stamen studio and the Gray Area theater, I’d walk on either Mission street or Valencia street. As I walked, I would count seconds, and press the record button when about five seconds had passed. It became somewhat meditative for me.  Over the days, I became more aware of the specific sounds around me.</p>
-          <p>Once I had audio samples, I could start working on the code for analyzing them. Data for each walk was transferred from the phone to laptop via usb cable. Android stores audio files in a format that has to be converted to another format before it can be played back. I used  ffmpeg with a shell script to convert the files. Most of the code for analysis and some visualizations of the audio files was written with Python, using various scientific and FFT code libraries.</p>
-          <p>Technical description and source code, mostly written in python, is online in the <a href="https://github.com/KristinHenry/myCitySoundsViz">myCitySoundsViz</a> repo.
-
-        </div> 
-      </div>
-
-      <div class="row"><p class="dot"><a id="w4"></a>.</p></div>
-      <div class="row">
-        <div class="col-md-2">
-          <h2>4</h2>
+        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <img class="card-img-top" src="imgs/withBarChart.jpg" alt="">
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="http://kristinhenry.github.io/randyRainbow.html">Data Art: Randy Rainbow</a>
+              </h4>
+              <p class="card-text">Whimsical Data Art project, tracking the growing success of comedian Randy Rainbow. Work-in-Progress. </br>
+                <a href="http://kristinhenry.github.io/randyRainbow.html">Interactive</a>
+              </p>
+            </div>
+          </div>
         </div>
-        <div class="col-md-8">
-          <h2>Visualizing Audio</h2>
-          <p>My first visualizations were of individual audio files. I’m fascinated with the audio waveforms, and how different types of sounds have different shapes.  Incorporating these in the final project was on my mind from the beginning.</p>
-          <img src="imgs/wave1.jpg" alt="waveform noise" height="230" width="300">
-          <img src="imgs/wave2.jpg" alt="waveform" height="230" width="300">
-          <p>The early days of the fellowship were filled with brainstorming and sketching. Thinking of ways to incorporate the waveforms, one of my early sketches reminds me of an electrical circuit.</p>
-          <img src="imgs/soundCircuit.jpg" alt="sound circuit sketch" height="300" width="1000">
-          <p>I also experimented a bit with processing.js and played with the idea of audio bubbles bouncing around. This was a lot of fun, and reminded of my days coding particle systems in AS3.</p>
-          <p><img src="imgs/bubbles1.png" alt="audio bubble sketch" height="490" width="350">
-            <img src="imgs/bubbles2.png" alt="audio bubble sketch" height="490" width="350"></p>       
-          <p>Identifying different types of sounds could have led to another level of detail in the visualization.  Listening and classifying each recording took a long time, and only a couple walks were analyzed this way.  Doing the classification automatically would make this much faster, so developing a system to classify short sounds is on my list of things to work on next. </p>
-          <p>I did get a good start though, and while learning about audio classification and signal processing, I learned a bit about audio fingerprinting and generating spectrographs. These show much more detail than waveforms, and can be used to classify audio recordings. They can also be very beautiful.</p>
-          <img src="imgs/doyouknowwhereyouare_tiny.jpg" alt="waveform" height="200" width="896">
-          <p></p>
-          <p>Once I had some recorded walks to work with, I started experimenting with mapping them. At first, it was just placing markers for samples in relative positions. The visualization took shape slowly, first for one walk, and then for several.</p>
-          <img src="imgs/screen_4.png" alt="mapping audio 2" height="200" width="890">
-          <p>At first, I was thinking that each recording would be classified, and the dots could be colored according to what type of sound it was.  But after experimenting with emphasizing individual walks, rather than aggregating the samples, I decided to go with using color to signify which samples were from the same walk.</p>
-          <img src="imgs/screen_5.png" alt="waveform" height="214" width="900">
-          <p>This led to experimenting with showing “menu” of walks, instead of showing all the data at once. Offsetting the position of each walk looked interesting, but wasn’t very useful for looking at one walk at a time. Adding relative noise levels for each sample, created some interesting patterns.</p>
-          <img src="imgs/screen_6.png" alt="waveform" height="230" width="300">
-          <img src="imgs/screen_2.png" alt="waveform" height="230" width="300">
-          <p>Decided to make a “menu” of walks, that could be examined in detail. Make them playable...like a song. Drawing a few streets and label them, to provide context.</p>
-          <p>Still wanted to show the waveforms of each audio sample, so included these in the details view for each sample. Details are visible when mousing over a mapped do, and when the walk’s recordings are played back.</p>
-          <img src="imgs/screenshot2.png" alt="myCitySounds version 1" height="400" width="900">
-          <p>Near the end, when everything was working and looked pretty good, a great comment was made on the documentation. It inspired me to rework the visualization, so that the menu was no longer off to the side. I'd been struggling with the "menu" being too dominant, so the menu now became the visualization. By this time, my D3 skills had improved a bit, and I could implement an idea more quickly than when I started on the project.</p>
-          <p>The final version:</p>
-          <img src="imgs/finalScreen.png" alt="myCitySounds final" height="450" width="860">
-          <p></p>
-          <p>One unexpected observation, when I started visualizing recordings on the map: I realized I was walking on Valencia street much more than Mission.  Why? Well, the block of Mission between 16th and 17th streets is ...well, there’s a lot of crime on that block.</p>
-          <a href="http://sanfrancisco.crimespotting.org/map/#hours=0-23&types=AA,Mu,Ro,SA,DP,Na,Al,Pr&lat=37.764&dtstart=2014-07-18T02:51:49-07:00&lon=-122.418&dtend=2014-08-13T10:31:39-07:00&zoom=17"><img src="imgs/crimespotting3.png" alt="waveform" height="200" width="500"></a>
-          <p></p>
-          <p>Once I noticed I’d been leaving out a big area in my project, I changed my pattern and walked to Gray Area along Mission street. If I stayed on the Eastern side of the street, especially between 16th and 17th streets, it <em>seemed</em> safer.</p>
-          <p>Working with the team at Stamen was fantastic. Coming from a science and engineering background, I’d never had access to so much design talent before. The feedback I received helped shape the visualizations. It helped me step away from the details of the data and see the big picture, to get from “engineer art” to a much better design.</p>
-
-
-        </div> 
-      </div>
-
-      <div class="row"><p class="dot"><a id="w5"></a>.</p></div>
-      <div class="row">
-        <div class="col-md-2">
-          <h2>5</h2>
+        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <img class="card-img-top" src="imgs/sticker_10.jpg" alt="">
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="https://www.etsy.com/shop/artatomic?section_id=22421729">Particle Stickers</a>
+              </h4>
+              <p class="card-text">Generative art in sticker-form.</br>
+                <a href="https://www.etsy.com/shop/artatomic?section_id=22421729">stickers</a>
+              </p>
+            </div>
+          </div>
         </div>
-        <div class="col-md-8">
-          <h2>Challenges</h2>
-          <p>For me, the greatest challenge was creative...about finding the story. I’m happy rooting around in  a dataset and finding new ways of exploring that data. But finding a way to share those discoveries with others, in a way that makes sense outside of my own brain? That’s a major challenge. It’s the age old challenge of good storytelling. </p>
-          <p>The time constraints were something I kept facing. Many ideas couldn’t be followed through on, because there wasn’t enough time. Sound classification being the one I most wish I’d had more time for.</p>
-
-        </div> 
-      </div>
-
-      <div class="row"><p class="dot"><a id="w6"></a>.</p></div>
-      <div class="row">
-        <div class="col-md-2">
-          <h2>6</h2>
+        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <a href="https://medium.com/@KristinHenry/on-becoming-a-dangerous-artist-6a22e5b1dfd4"><img class="card-img-top" src="imgs/multitude_pic.jpg" alt=""></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="https://medium.com/@KristinHenry/on-becoming-a-dangerous-artist-6a22e5b1dfd4">Dangerous Artists</a>
+              </h4>
+              <p class="card-text">Generative protest art.</br>
+                <a href="https://medium.com/@KristinHenry/on-becoming-a-dangerous-artist-6a22e5b1dfd4">article</a> | <a href="https://www.etsy.com/listing/502118365/protest-art-generative-art-coded-with">prints</a>
+              </p>
+            </div>
+          </div>
         </div>
-        <div class="col-md-8">
-          <h2>Installation at Gray Area Theater</h2>
-          <p>For the installation at the Gray Area theater, there will be a  modified projected version of the visualization that’s now online. </p>
-          <p>The spectrographs were just too beautiful to mothball. So, I listened to each of the 8,000+ recordings, most of which were of background and traffic noise. But some were interesting sounds, like sirens, voices, or music. The installation will include printed spectrographs of a sampling of these sounds.</p>
-        </div> 
-      </div>
-
-      <div class="row"><p class="dot"><a id="w7"></a>.</p></div>
-      <div class="row">
-        <div class="col-md-2">
-          <h2>7</h2>
+        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <a href="https://www.patreon.com/posts/mapping-with-d3-13534678"><img class="card-img-top" src="imgs/parkingMeters.jpg" alt=""></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="https://www.patreon.com/posts/mapping-with-d3-13534678">Mapping San Francisco Parking Meters</a>
+              </h4>
+              <p class="card-text">Mapping with Leaflet and D3 (V4)<br>
+                <a href="https://www.patreon.com/posts/mapping-with-d3-13534678">notes</a> | <a href="http://bl.ocks.org/kristin-henry-sf/2ffa2a4d06412db552f627b48b85cf97">code</a></p>
+            </div>
+          </div>
         </div>
-        <div class="col-md-8">
-          <h2>What's Next?</h2>
-          <p>First, develop a sound classification system, update my research app, and continue collecting data around San Francisco.</p>
-          <p>In time, the plan is to open the project for community participation and to support an open data set.</p>
-
-        </div> 
-      </div>
-
-     <!--  <div class="row"><p class="dot"><a id="w8"></a>.</p></div>
-      <div class="row">
-        <div class="col-md-2">
-          <h2>8</h2>
+        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <a href="https://www.patreon.com/posts/san-francisco-13537397"><img class="card-img-top" src="imgs/filmLocations.jpg" alt=""></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="https://www.patreon.com/posts/san-francisco-13537397">Film Locations</a>
+              </h4>
+              <p class="card-text">Film locations in San Francisco, in D3.V4<br>
+                <a href="https://bl.ocks.org/kristin-henry-sf/729c2c41e348d7576f9f93a6e4476145">code</a></p>
+            </div>
+          </div>
         </div>
-        <div class="col-md-8">
-          <h2>Get Involved</h2>
-          <p> coming soon </p>
-
-        </div> 
-      </div>
- -->
-     
-      <div class="row"><p class="dot"><a id="w9"></a></p></div>
-      <div class="row">
-        <div class="col-md-2">
-          <h2></h2>
+        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <a href="https://www.patreon.com/posts/migrating-d3-to-10676325"><img class="card-img-top" src="imgs/d3v4Talk.jpg" alt=""></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="https://www.patreon.com/posts/migrating-d3-to-10676325">Migrating to V4 of D3</a>
+              </h4>
+              <p class="card-text">Slides from presentation on migrating to version 4 of d3.js<br>
+                <a href="https://medium.com/@KristinHenry/migrating-to-version-4-of-d3-part1-6a5e83ce8e31">article</a> | <a href="https://www.patreon.com/posts/migrating-d3-to-10676325">slides</a></p>
+            </div>
+          </div>
         </div>
-        <div class="col-md-8">
-          <h2>About</h2>
-          <p>Kristin Henry is a Computer Scientist specializing in data visualization and data science, generative artist, and full stack engineer.</p>
-          <p><a href="https://github.com/KristinHenry">github</a> | <a href="http://kristinhenry.dunked.com/">portfolio</a> </p>
+        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <a href="https://www.patreon.com/posts/particles-8325633"><img class="card-img-top" src="imgs/particles.jpg" alt=""></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="https://www.patreon.com/posts/particles-8325633">Particles in D3.V4</a>
+              </h4>
+              <p class="card-text">Particle System in v4 of d3.js<br>
+                <a href="https://www.patreon.com/posts/particles-8325633">notes</a></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <a href="https://towardsdatascience.com/hacking-data-art-at-an-ai-genomic-hackathon-62e16efb49ce"><img class="card-img-top" src="imgs/dotsTranslating.jpg" alt=""></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="https://towardsdatascience.com/hacking-data-art-at-an-ai-genomic-hackathon-62e16efb49ce">nf2Biohack</a>
+              </h4>
+              <p class="card-text">Data Art project for the NF2 Hackathon in San Francisco.<br>
+                <a href="https://towardsdatascience.com/hacking-data-art-at-an-ai-genomic-hackathon-62e16efb49ce">article</a> | <a href="https://github.com/KristinHenry/nf2hack">code</a></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <a href="https://medium.com/@KristinHenry/in-defense-of-pie-charts-and-why-you-shouldnt-use-them-df2e8ccb5f76"><img class="card-img-top" src="imgs/pieCharts.jpg" alt=""></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="https://medium.com/@KristinHenry/in-defense-of-pie-charts-and-why-you-shouldnt-use-them-df2e8ccb5f76">Pie Charts</a>
+              </h4>
+              <p class="card-text">Data Visualization Article: In Defense of Pie Charts, and Why You Shouldn’t Use Them<br>
+                <a href="https://medium.com/@KristinHenry/in-defense-of-pie-charts-and-why-you-shouldnt-use-them-df2e8ccb5f76">article</a> | <a href="https://bl.ocks.org/kristin-henry-sf/9b7ae1b82e0144aa042dd8d31e4e5d68">code</a></p>
+            </div>
+          </div>
+        </div>
+         <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <a href="https://www.patreon.com/posts/charting-chem-8836011"><img class="card-img-top" src="imgs/chartingChem.jpg" alt=""></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="https://www.patreon.com/posts/charting-chem-8836011">Charting Chem</a>
+              </h4>
+              <p class="card-text">Experimenting<br>
+                <a href="https://medium.com/@KristinHenry/in-defense-of-pie-charts-and-why-you-shouldnt-use-them-df2e8ccb5f76">notes</a></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <a href="https://kristinhenry.dunked.com/mycitysounds"><img class="card-img-top" src="imgs/coloringPages.jpeg" alt=""></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="https://kristinhenry.dunked.com/mycitysounds">Generative Art Coloring Pages</a>
+              </h4>
+              <p class="card-text">Adult coloring pages created with code, inspired by Chemistry.<br>
+                <a href="https://medium.com/@KristinHenry/coloring-generative-art-pages-522a5dd7f892">article</a> | <a href="https://www.etsy.com/shop/artatomic?section_id=17744526">prints</a></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <a href="https://kristinhenry.dunked.com/mycitysounds"><img class="card-img-top" src="imgs/citySoundsLive.jpg" alt=""></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="https://kristinhenry.dunked.com/mycitysounds">myCitySounds</a>
+              </h4>
+              <p class="card-text">Sound map and art installation!</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <a href="https://www.etsy.com/shop/artatomic?section_id=18815927"><img class="card-img-top" src="imgs/neuro_dark_9z_sm.jpg" alt=""></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="https://www.etsy.com/shop/artatomic?section_id=18815927">Neuro Art</a>
+              </h4>
+              <p class="card-text">Generative Art Nerve Patterns<br>
+                <a href="https://www.etsy.com/shop/artatomic?section_id=18815927">prints</a>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <a href="https://www.patreon.com/posts/data-viz-brain-8838086"><img class="card-img-top" src="imgs/datavizBrainDump.jpg" alt=""></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="https://www.patreon.com/posts/data-viz-brain-8838086">Data Viz Brain Dump</a>
+              </h4>
+              <p class="card-text">Thoughts on Data Vizualization</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <a href="https://www.etsy.com/shop/artatomic?section_id=18632675"><img class="card-img-top" src="imgs/scarves_1.jpeg" alt=""></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="https://www.etsy.com/shop/artatomic?section_id=18632675">Art Atomic Scarves</a>
+              </h4>
+              <p class="card-text">Wearable Generative Art. Created with code, inspired by Chemistry and Physics.<br>
+                <a href="https://medium.com/@KristinHenry/artatomic-from-code-to-textile-a-creative-journey-62eb2d72765f">article</a> | <a href="https://www.etsy.com/shop/artatomic?section_id=18632675">prints</a></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <a href="https://www.patreon.com/posts/artatomic-video-9155896"><img class="card-img-top" src="imgs/artAtomicMovie.jpg" alt=""></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="https://www.patreon.com/posts/artatomic-video-9155896">Promo for Art Atomic Scarves</a>
+              </h4>
+              <p class="card-text">Wearable Generative Art. Created with code, inspired by Chemistry and Physics.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <a href="https://www.patreon.com/posts/runway-ready-on-9076159"><img class="card-img-top" src="imgs/runway.jpg" alt=""></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="https://www.patreon.com/posts/runway-ready-on-9076159">Code Sketching</a>
+              </h4>
+              <p class="card-text">Generative Art, from drawing prompts<br>
+                <a href="https://kristinhenry.github.io/Sketches2014/">code</a> |
+                <a href="https://www.patreon.com/posts/runway-ready-on-9076159">notes</a></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <a href="https://kristinhenry.dunked.com/particles"><img class="card-img-top" src="imgs/dots_2_June2013_sm.jpg" alt=""></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="https://kristinhenry.dunked.com/particles">Particles</a>
+              </h4>
+              <p class="card-text">Generative Art, created with code, inspired by Chemistry.<br>
+                <a href="https://www.etsy.com/shop/artatomic?section_id=18813608">prints</a></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <a href="https://kristinhenry.dunked.com/self-drawing-code-sketces"><img class="card-img-top" src="imgs/selfDrawingCode.jpg" alt=""></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="https://kristinhenry.dunked.com/self-drawing-code-sketces">Self-Drawing Code</a>
+              </h4>
+              <p class="card-text">Generative Art coded in Python<br>
+                <a href="https://github.com/KristinHenry/selfDrawingCode">code</a></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <a href="https://www.etsy.com/shop/artatomic?section_id=18816103"><img class="card-img-top" src="imgs/mystic_rose_art.jpg" alt=""></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="https://www.etsy.com/shop/artatomic?section_id=18816103">Mystic Rose Art</a>
+              </h4>
+              <p class="card-text">Generative Art with Mystic Rose math.<br>
+                <a href="https://www.etsy.com/shop/artatomic?section_id=18816103">prints</a></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <a href="https://www.patreon.com/posts/mystic-rose-13472569"><img class="card-img-top" src="imgs/mysticRoseParticles.png" alt=""></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="https://www.patreon.com/posts/mystic-rose-13472569">Mystic Rose Particles</a>
+              </h4>
+              <p class="card-text">Generative Art with Mystic Rose math.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <a href="https://www.patreon.com/posts/random-walk-on-13472801"><img class="card-img-top" src="imgs/randomWalk.jpg" alt=""></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="https://www.patreon.com/posts/random-walk-on-13472801">Random Walk</a>
+              </h4>
+              <p class="card-text">Random walk on a grid.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <a href="https://www.patreon.com/posts/generative-13474615"><img class="card-img-top" src="imgs/generativeStitches.jpg" alt=""></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="https://www.patreon.com/posts/generative-13474615">Generative Stitches</a>
+              </h4>
+              <p class="card-text">Stop motion video of generative embroidery.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <a href="https://www.patreon.com/posts/particle-dance-13502359"><img class="card-img-top" src="imgs/particleDance.jpg" alt=""></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="https://www.patreon.com/posts/particle-dance-13502359">Particle Dance</a>
+              </h4>
+              <p class="card-text">Generative Animation, created with code, inspired by Chemistry.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <a href="https://www.patreon.com/posts/wandering-13503554"><img class="card-img-top" src="imgs/wandering.jpg" alt=""></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="https://www.patreon.com/posts/wandering-13503554">Wandering Geometries</a>
+              </h4>
+              <p class="card-text">Random walk on a grid.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <a href="https://kristinhenry.dunked.com/poetry-color-stories"><img class="card-img-top" src="imgs/poemColors.jpg" alt=""></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="https://kristinhenry.dunked.com/poetry-color-stories">Poetry Color Stories</a>
+              </h4>
+              <p class="card-text">Data Art: using Character Frequencies in Poetry. Inspired by protein folding.<br>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <a href="https://kristinhenry.dunked.com/insulin-spectrum"><img class="card-img-top" src="imgs/insulin.jpg" alt=""></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="https://kristinhenry.dunked.com/insulin-spectrum">Proteins</a>
+              </h4>
+              <p class="card-text">Data Art: Visualizing Proteins using Amino Acid Frequencies<br>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <a href="https://kristinhenry.dunked.com/urban-data-challenge-visualizing-muni-data"><img class="card-img-top" src="imgs/urbanData.jpg" alt=""></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="https://kristinhenry.dunked.com/urban-data-challenge-visualizing-muni-data">Urban Data Challenge</a>
+              </h4>
+              <p class="card-text">Visualizing MUNI riders with R.<br>
+                <a href="https://github.com/KristinHenry/Visualizing-SF-Urban-Data">code</a></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <a href="https://kristinhenry.dunked.com/searching-for-endogenous-retroviral-proteins-in-the-mouse-genome"><img class="card-img-top" src="imgs/geneSOM.jpg" alt=""></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="https://kristinhenry.dunked.com/searching-for-endogenous-retroviral-proteins-in-the-mouse-genome">Self Organizing Map Gene Clustering</a>
+              </h4>
+              <p class="card-text">Searching for Endogenous Retroviral Proteins in the Mouse Genome.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <a href="https://kristinhenry.dunked.com/mysoundscape-analysis-and-visualization-of-audio-samples"><img class="card-img-top" src="imgs/mySoundScape.jpg" alt=""></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="https://kristinhenry.dunked.com/mysoundscape-analysis-and-visualization-of-audio-samples">mySoundScape</a>
+              </h4>
+              <p class="card-text">A computer science study of daily noise pollution.</p>
+            </div>
+          </div>
+        </div>
+         <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <a href="https://www.patreon.com/posts/painting-with-10690403"><img class="card-img-top" src="imgs/particleSquares.jpg" alt=""></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="https://www.patreon.com/posts/painting-with-10690403">Particle Squares</a>
+              </h4>
+              <p class="card-text">Painting with particles, and code.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <a href="https://kristinhenry.dunked.com/geometric-generative-flowers"><img class="card-img-top" src="imgs/flowers.jpg" alt=""></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="https://kristinhenry.dunked.com/geometric-generative-flowers">Generative Flowers</a>
+              </h4>
+              <p class="card-text">Geometric generative art.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <a href="https://www.etsy.com/listing/543793099/build-a-cell-kit-cell-biology-learning"><img class="card-img-top" src="imgs/cellProject.jpeg" alt=""></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="https://medium.com/@KristinHenry/galaxygoos-cell-project-and-the-maker-faire-4011ca784357">GalaxyGoo's Cell Project</a>
+              </h4>
+              <p class="card-text">Building 3D models of cells, organelle by organelle, at the Maker Faire.<br>
+                <a href="https://medium.com/@KristinHenry/galaxygoos-cell-project-and-the-maker-faire-4011ca784357">article</a></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <a href="https://www.etsy.com/listing/543793099/build-a-cell-kit-cell-biology-learning"><img class="card-img-top" src="imgs/organelles.jpg" alt=""></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="https://www.etsy.com/listing/543793099/build-a-cell-kit-cell-biology-learning">Build-a-Cell</a>
+              </h4>
+              <p class="card-text">Premade organelles, for GalaxyGoo's Build a Cell project.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <a href="https://www.etsy.com/listing/62149856/diy-embroidery-kit-cell-biology"><img class="card-img-top" src="imgs/cell_embroidery.jpg" alt=""></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="https://www.etsy.com/listing/62149856/diy-embroidery-kit-cell-biology">Cell Biology Embroidery</a>
+              </h4>
+              <p class="card-text">Cell Biology embroidery kits.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <a href="https://www.etsy.com/listing/72661172/cell-biology-inspired-abstract-art-san"><img class="card-img-top" src="imgs/cell_mandala_art.jpg" alt=""></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="https://www.etsy.com/listing/72661172/cell-biology-inspired-abstract-art-san">Cell Mandala Art</a>
+              </h4>
+              <p class="card-text">Generative Art with Cell organelle illustrations.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <a href="https://kristinhenry.dunked.com/the-color-of-spam"><img class="card-img-top" src="imgs/colorOfSpam.jpg" alt=""></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="https://kristinhenry.dunked.com/the-color-of-spam">Color of Spam</a>
+              </h4>
+              <p class="card-text">Data Art using the IP addresses of spammers.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <a href="https://kristinhenry.dunked.com/adobe-gallery-piece"><img class="card-img-top" src="imgs/adobeAnimation.jpg" alt=""></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="https://kristinhenry.dunked.com/adobe-gallery-piece">Animation for Adobe Gallery</a>
+              </h4>
+              <p class="card-text">My first continually running animated generative art piece.</p>
+            </div>
+          </div>
+        </div>
+         <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <a href="https://www.patreon.com/posts/another-life-8326907"><img class="card-img-top" src="imgs/flashBook.jpg" alt=""></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="https://www.patreon.com/posts/another-life-8326907">New Masters Of Flash</a>
+              </h4>
+              <p class="card-text">My chapter...from a past life.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <a href="https://kristinhenry.dunked.com/neuro-muscular-junction-simulation"><img class="card-img-top" src="imgs/nmjSim.jpg" alt=""></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="https://kristinhenry.dunked.com/neuro-muscular-junction-simulation">Neuromuscular Junction Simulation</a>
+              </h4>
+              <p class="card-text">Interactive animated simulation of the Neuromuscular Junction for Anatomy and Physiology students</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <a href="https://kristinhenry.dunked.com/interactive-periodic-table-of-elements"><img class="card-img-top" src="imgs/stickyElementalSnow.jpg" alt=""></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="https://kristinhenry.dunked.com/interactive-periodic-table-of-elements">Sticky Elemental Snow</a>
+              </h4>
+              <p class="card-text">Having fun with the Periodic Table of Elements....slightly Matrix inspired.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <a href="http://underground-lab.com/page3.html"><img class="card-img-top" src="imgs/tableOfElements.jpg" alt=""></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="http://underground-lab.com/page3.html">Periodic Table of Elements</a>
+              </h4>
+              <p class="card-text">Interactive visualization for Chemistry</p>
+            </div>
+          </div>
+        </div>
+         <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+          <div class="card h-100">
+            <a href="http://underground-lab.com/page6.html"><img class="card-img-top" src="imgs/hiv.jpg" alt=""></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="http://underground-lab.com/page6.html">Molecular Biology of HIV</a>
+              </h4>
+              <p class="card-text">Animation of the Molecular Biology of an HIV infection.</p>
+            </div>
+          </div>
+        </div>
 
-          <p>This work was made possible through the <a href="http://creativecode.io/fellowship/">Gray Area Creative Code Fellowship</a> program.</p>
 
-        </div> 
+
+       
       </div>
+      <!-- /.row -->
+
+
+
+      <!-- Pagination -->
+       <!--
+      <ul class="pagination justify-content-center">
+        <li class="page-item">
+          <a class="page-link" href="#" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+            <span class="sr-only">Previous</span>
+          </a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#">1</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#">2</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#">3</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+            <span class="sr-only">Next</span>
+          </a>
+        </li>
+      </ul>
+    -->
+
     </div>
+    <!-- /.container -->
 
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+      <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; Kristin Henry 2018</p>
+      </div>
+      <!-- /.container -->
+    </footer>
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
-    <!-- google analytics script -->
-    <script>
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-        ga('create', 'UA-61802131-1', 'auto');
-        ga('send', 'pageview');
-    </script>
   </body>
+
 </html>
